@@ -1,0 +1,172 @@
+﻿*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #c17514;
+    background: url(themes/moka/images/siteBackground.jpg) repeat-x left top;
+}
+.horsep
+{
+    height: 10px;
+    background: url(themes/moka/images/horSeparator.gif) repeat-x left top;
+    margin: 20px 0;
+}
+h1
+{
+    font-size: 18px;
+    color: #0082bf;
+}
+a
+{
+    color: #512404;
+    text-decoration: underline;
+}
+a:hover
+{
+    color: #512404;
+    text-decoration: none;
+}
+#container
+{
+    width: 847px;
+    margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+    background: #FFF;
+}
+#header
+{
+    height: 329px;
+    background: url(themes/moka/images/headerTopBackground.jpg) no-repeat left top;
+}
+.logo
+{
+    color: #fddaac;
+    font-size: 48px;
+}
+.author
+{
+    color: #da9143;
+    font-size: 12px;
+}
+.author a
+{
+    color: #da9143;
+}
+#sidebar1
+{
+    float: right; /* since this element is floated, a width must be given */
+    width: 214px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+    margin-right: 20px;
+}
+.sidT
+{
+    background: url(themes/moka/images/sidebarTitle.jpg) no-repeat left;
+    height: 39px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFF;
+}
+.sidT .tt
+{
+    padding: 10px 0 0 20px;
+}
+#sidebar1 li
+{
+    list-style: none;
+    margin: 10px 0;
+    background: url(themes/moka/images/p.jpg) no-repeat left top;
+    padding-left: 20px;
+}
+#sidebar1 li span
+{
+    font-weight: bold;
+    color: #512404;
+}
+#mainContent
+{
+    margin: 0 283px 0 20px; /* the right margin on this div element creates the column down the right side of the page - no matter how much content the sidebar1 div contains, the column space will remain. You can remove this margin if you want the #mainContent div's text to fill the #sidebar1 space when the content in #sidebar1 ends. */
+}
+.textBox
+{
+    width: 244px;
+    float: left;
+    padding: 10px;
+}
+.textBox span
+{
+    font-weight: bold;
+    color: #512404;
+}
+.textBox .ttt
+{
+    background: url(themes/moka/images/bodyTitle.jpg) no-repeat left top;
+    height: 39px;
+    margin-bottom: 10px;
+}
+.boxT
+{
+    font-weight: bold;
+    color: #FFF;
+    padding: 10px 0 0 20px;
+}
+#footer
+{
+    padding: 0 0 40px 0;
+}
+#footer p
+{
+    text-align: center;
+}
+.clearfloat
+{
+    /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+    clear: both;
+    height: 0;
+    font-size: 1px;
+    line-height: 0px;
+}
+#navcontainer
+{
+    padding: 37px 0 0 60px;
+}
+ul#navlist
+{
+    margin-left: 0;
+    padding-left: 0;
+    white-space: nowrap;
+}
+
+#navlist li
+{
+    display: inline;
+    list-style-type: none;
+}
+
+#navlist a
+{
+    padding: 3px 10px;
+}
+
+#navlist a:link, #navlist a:visited
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+#navlist a:hover
+{
+    color: #fff;
+    background-color: #cd9e69;
+    text-decoration: none;
+}
+
+#navlist #active a
+{
+    color: #fff;
+    background-color: #cd9e69;
+    text-decoration: none;
+}

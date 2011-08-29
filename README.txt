@@ -1,0 +1,1 @@
+Expresso is a sample ASP.NET MVC 3 e-commerce web application used to demonstrate various architectural patterns and techniques.
