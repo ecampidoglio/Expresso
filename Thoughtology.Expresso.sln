@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thoughtology.Expresso", "Thoughtology.Expresso\Thoughtology.Expresso.csproj", "{6340549A-86BC-4D81-9456-5E9B227F07E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thoughtology.Expresso.Tests", "Thoughtology.Expresso.Tests\Thoughtology.Expresso.Tests.csproj", "{B8A469D1-95FB-46BC-A02F-0AC1ED7FF524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thoughtology.Expresso.Web", "Thoughtology.Expresso.Web\Thoughtology.Expresso.Web.csproj", "{6340549A-86BC-4D81-9456-5E9B227F07E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thoughtology.Expresso.Data", "Thoughtology.Expresso.Data\Thoughtology.Expresso.Data.csproj", "{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thoughtology.Expresso.Model", "Thoughtology.Expresso.Model\Thoughtology.Expresso.Model.csproj", "{EACABA32-B767-48FD-96A2-91B446A5E4B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8A469D1-95FB-46BC-A02F-0AC1ED7FF524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8A469D1-95FB-46BC-A02F-0AC1ED7FF524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8A469D1-95FB-46BC-A02F-0AC1ED7FF524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8A469D1-95FB-46BC-A02F-0AC1ED7FF524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6340549A-86BC-4D81-9456-5E9B227F07E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACABA32-B767-48FD-96A2-91B446A5E4B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACABA32-B767-48FD-96A2-91B446A5E4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACABA32-B767-48FD-96A2-91B446A5E4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACABA32-B767-48FD-96A2-91B446A5E4B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
