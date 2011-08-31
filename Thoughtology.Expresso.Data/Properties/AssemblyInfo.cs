@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Thoughtology.Expresso.Tests")]
+[assembly: AssemblyTitle("Thoughtology.Expresso.Data")]
 [assembly: AssemblyCompany("Thoughtology")]
 [assembly: AssemblyProduct("Thoughtology.Expresso")]
 [assembly: AssemblyCopyright("Creative Commons Attribution 3.0")]
