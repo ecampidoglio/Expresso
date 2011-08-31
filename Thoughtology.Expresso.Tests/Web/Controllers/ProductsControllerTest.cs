@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Thoughtology.Expresso.Tests.Foundation;
 using Thoughtology.Expresso.Web.Controllers;
 using Xunit;
 using Xunit.Extensions;
@@ -16,7 +15,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         }
 
         [Theory]
-        [AutoMoqData]
+        [InlineData("")]
         public void Index_DoesNotReturnNull(object productService)
         {
             var sut = new ProductsController(productService);
@@ -27,7 +26,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         }
 
         [Theory]
-        [AutoMoqData]
+        [InlineData("")]
         public void Index_ReturnsEmptyResult(object productService)
         {
             var sut = new ProductsController(productService);
@@ -38,7 +37,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         }
 
         [Theory]
-        [AutoMoqData]
+        [InlineData("")]
         public void Coffee_DoesNotReturnNull(object productService)
         {
             var sut = new ProductsController(productService);
@@ -49,7 +48,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         }
 
         [Theory]
-        [AutoMoqData]
+        [InlineData("")]
         public void Coffee_ReturnsViewResult(object productService)
         {
             var sut = new ProductsController(productService);
