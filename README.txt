@@ -1,1 +1,1 @@
-Expresso is a sample ASP.NET MVC 3 e-commerce web application used to demonstrate various architectural patterns and techniques.
+Expresso is a lightweight ASP.NET MVC 3 Markdown-based blog engine used to demonstrate various architectural patterns and techniques.
