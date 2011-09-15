@@ -34,9 +34,6 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="MarkdownSharp">
-      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -59,8 +56,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\EntityFramework.SqlServerCompact.cs" />
+    <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Thoughtology.Expresso.Model\Thoughtology.Expresso.Model.csproj">
+      <Project>{EACABA32-B767-48FD-96A2-91B446A5E4B9}</Project>
+      <Name>Thoughtology.Expresso.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
