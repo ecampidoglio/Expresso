@@ -1,20 +1,21 @@
 using System;
 using System.Web.Mvc;
+using Thoughtology.Expresso.Services;
 
 namespace Thoughtology.Expresso.Controllers
 {
     public class PostsController
     {
-        private readonly object postService;
+        private readonly IPostQueryService postQueryService;
 
-        public PostsController(object postService)
+        public PostsController(IPostQueryService postQueryService)
         {
-            if (postService == null)
+            if (postQueryService == null)
             {
-                throw new ArgumentNullException("postService");
+                throw new ArgumentNullException("postQueryService");
             }
 
-            this.postService = postService;
+            this.postQueryService = postQueryService;
         }
 
         public object Index()
