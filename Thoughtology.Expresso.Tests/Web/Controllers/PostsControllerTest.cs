@@ -91,7 +91,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             var result = view.ViewBag.Posts as IEnumerable<Post>;
 
             // Then
-            Assert.False(result.Any());
+            Assert.Equal(posts.Count(), result.Count());
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Web.Mvc;
-using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Services;
 
 namespace Thoughtology.Expresso.Controllers
@@ -21,7 +20,7 @@ namespace Thoughtology.Expresso.Controllers
 
         public object Index()
         {
-            ViewBag.Posts = new Post[0];
+            ViewBag.Posts = postQueryService.Find();
 
             return View();
         }
