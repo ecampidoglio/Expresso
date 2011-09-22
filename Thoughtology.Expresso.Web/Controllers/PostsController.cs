@@ -1,10 +1,11 @@
 using System;
 using System.Web.Mvc;
+using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Services;
 
 namespace Thoughtology.Expresso.Controllers
 {
-    public class PostsController
+    public class PostsController : Controller
     {
         private readonly IPostQueryService postQueryService;
 
@@ -20,7 +21,9 @@ namespace Thoughtology.Expresso.Controllers
 
         public object Index()
         {
-            return new EmptyResult();
+            ViewBag.Posts = new Post[0];
+
+            return View();
         }
     }
 }
