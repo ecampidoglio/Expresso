@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Collections;
 
 namespace Thoughtology.Expresso.Data
 {
@@ -10,7 +9,7 @@ namespace Thoughtology.Expresso.Data
     /// objects to create sessions that encapsulate multiple operations against the database.
     /// </summary>
     /// <typeparam name="TEntity">The type of entity instances to access.</typeparam>
-    public class Repository<TEntity> : Thoughtology.Expresso.Data.IRepository<TEntity>
+    public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         private readonly IUnitOfWork unitOfWork;
@@ -63,7 +62,7 @@ namespace Thoughtology.Expresso.Data
         /// </returns>
         public IEnumerable<TEntity> FindAll(params string[] includedPropertyPaths)
         {
-            throw new NotImplementedException();
+            return unitOfWork.Get<TEntity>();
         }
 
         /// <summary>

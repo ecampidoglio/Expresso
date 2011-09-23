@@ -16,6 +16,16 @@ namespace Thoughtology.Expresso.Tests.Data
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
         }
 
+        [Fact]
+        public void Constructor_SutIsUnitOfWork()
+        {
+            // When
+            var sut = new DataContext();
+
+            // Then
+            Assert.IsAssignableFrom<IUnitOfWork>(sut);
+        }
+
         [Theory]
         [AutoData]
         public void Constructor_DoesNotThrow(string databaseName)
@@ -33,7 +43,7 @@ namespace Thoughtology.Expresso.Tests.Data
         {
             var sut = new DataContext(databaseName);
 
-            var result = sut.Posts;
+            var result = sut.Get<Post>();
 
             Assert.NotNull(result);
             sut.Database.Delete();
@@ -46,7 +56,7 @@ namespace Thoughtology.Expresso.Tests.Data
         {
             var sut = new DataContext(databaseName);
 
-            var result = sut.Posts;
+            var result = sut.Get<Post>();
 
             Assert.Empty(result);
             sut.Database.Delete();
@@ -59,9 +69,9 @@ namespace Thoughtology.Expresso.Tests.Data
         {
             var sut = new DataContext(databaseName);
 
-            sut.Posts.Add(post);
+            sut.Get<Post>().Add(post);
             sut.SaveChanges();
-            var result = sut.Posts;
+            var result = sut.Get<Post>();
 
             Assert.Equal(1, result.Count());
             sut.Database.Delete();

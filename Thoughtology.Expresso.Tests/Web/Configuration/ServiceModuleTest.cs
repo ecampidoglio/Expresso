@@ -2,19 +2,19 @@
 using System.Linq;
 using Autofac;
 using Autofac.Core;
-using Thoughtology.Expresso.Data;
+using Thoughtology.Expresso.Services;
 using Thoughtology.Expresso.Web.Configuration;
 using Xunit;
 
 namespace Thoughtology.Expresso.Tests.Web.Configuration
 {
-    public class RepositoryModuleTest
+    public class ServiceModuleTest
     {
         [Fact]
         public void Constructor_SutIsModule()
         {
             // When
-            var sut = new RepositoryModule();
+            var sut = new ServiceModule();
 
             // Then
             Assert.IsAssignableFrom<IModule>(sut);
@@ -24,9 +24,9 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
         public void BuildContainer_ContainerHasAllExpectedServices()
         {
             // Given
-            var expectedServices = new Type[] { typeof(IUnitOfWork), typeof(IRepository<>) };
+            var expectedServices = new Type[] { typeof(IPostQueryService) };
             var builder = new ContainerBuilder();
-            var sut = new RepositoryModule();
+            var sut = new ServiceModule();
 
             // When
             builder.RegisterModule(sut);

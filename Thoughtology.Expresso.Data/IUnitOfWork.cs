@@ -1,6 +1,5 @@
 using System;
 using System.Data.Entity;
-using Thoughtology.Expresso.Model;
 
 namespace Thoughtology.Expresso.Data
 {
@@ -10,9 +9,11 @@ namespace Thoughtology.Expresso.Data
     public interface IUnitOfWork : IDisposable
     {
         /// <summary>
-        /// Gets or sets a collection of <see cref="Posts"/> entities.
+        /// Retrieves the collection of entities of the specified <typeparamref name="TEntity"/> type from the data store.
         /// </summary>
-        DbSet<Post> Posts { get; set; }
+        /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
+        /// <returns>The set of entities.</returns>
+        IDbSet<TEntity> Get<TEntity>() where TEntity : class;
 
         /// <summary>
         /// Performs any pending operations on the data store as a single unit.

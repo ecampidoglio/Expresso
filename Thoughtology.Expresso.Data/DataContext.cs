@@ -25,16 +25,29 @@ namespace Thoughtology.Expresso.Data
         }
 
         /// <summary>
-        /// Gets or sets a collection of <see cref="Posts"/> entities.
+        /// Gets the collection of <see cref="Posts"/> entities in the data store.
         /// </summary>
-        public DbSet<Post> Posts { get; set; }
+        public IDbSet<Post> Posts
+        {
+            get { return Get<Post>(); }
+        }
+
+        /// <summary>
+        /// Retrieves the collection of entities of the specified <typeparamref name="TEntity"/> type from the data store.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
+        /// <returns>The set of entities.</returns>
+        public IDbSet<TEntity> Get<TEntity>() where TEntity : class
+        {
+            return Set<TEntity>();
+        }
 
         /// <summary>
         /// Performs any pending operations on the data store as a single unit.
         /// </summary>
         public void Commit()
         {
-            this.SaveChanges();
+            SaveChanges();
         }
     }
 }
