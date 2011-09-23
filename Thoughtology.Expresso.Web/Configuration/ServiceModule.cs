@@ -1,4 +1,5 @@
 using Autofac;
+using Autofac.Integration.Mvc;
 using Thoughtology.Expresso.Services;
 
 namespace Thoughtology.Expresso.Web.Configuration
@@ -10,7 +11,8 @@ namespace Thoughtology.Expresso.Web.Configuration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<PostQueryService>().As<IPostQueryService>();
+            builder.RegisterGeneric(typeof(QueryService<>)).InstancePerHttpRequest().As(typeof(IQueryService<>));
+            builder.RegisterGeneric(typeof(CommandService<>)).InstancePerHttpRequest().As(typeof(ICommandService<>));
         }
     }
 }

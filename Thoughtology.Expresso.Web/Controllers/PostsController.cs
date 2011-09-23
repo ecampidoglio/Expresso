@@ -1,5 +1,6 @@
 using System;
 using System.Web.Mvc;
+using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Services;
 
 namespace Thoughtology.Expresso.Controllers
@@ -9,13 +10,14 @@ namespace Thoughtology.Expresso.Controllers
     /// </summary>
     public class PostsController : Controller
     {
-        private readonly IPostQueryService postQueryService;
+        private readonly IQueryService<Post> postQueryService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostsController"/> class.
         /// </summary>
-        /// <param name="postQueryService">The <see cref="IPostQueryService"/> used to retrieve the posts to display.</param>
-        public PostsController(IPostQueryService postQueryService)
+        /// <param name="postQueryService">The query service used to retrieve the <see cref="Post"/> items to display.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="postQueryService"/> is null.</exception>
+        public PostsController(IQueryService<Post> postQueryService)
         {
             if (postQueryService == null)
             {

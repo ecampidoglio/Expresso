@@ -24,7 +24,11 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
         public void BuildContainer_ContainerHasAllExpectedServices()
         {
             // Given
-            var expectedServices = new Type[] { typeof(IPostQueryService) };
+            var expectedServices = new Type[]
+            {
+                typeof(IQueryService<>),
+                typeof(ICommandService<>)
+            };
             var builder = new ContainerBuilder();
             var sut = new ServiceModule();
 

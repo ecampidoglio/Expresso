@@ -67,4 +67,11 @@ namespace Thoughtology.Expresso.Data
         /// <exception cref="ArgumentNullException">instance is null.</exception>
         void Save(TEntity instance);
     }
+
+    /// <summary>
+    /// Defines the interface used to access loosely typed object instances from the data store.
+    /// </summary>
+    public interface IRepository : IRepository<object>
+    {
+    }
 }

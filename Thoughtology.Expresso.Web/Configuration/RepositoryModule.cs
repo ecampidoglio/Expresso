@@ -1,4 +1,5 @@
 using Autofac;
+using Autofac.Integration.Mvc;
 using Thoughtology.Expresso.Data;
 
 namespace Thoughtology.Expresso.Web.Configuration
@@ -15,8 +16,8 @@ namespace Thoughtology.Expresso.Web.Configuration
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new DataContext(ConnectionString)).As<IUnitOfWork>();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.Register(c => new DataContext(ConnectionString)).InstancePerHttpRequest().As<IUnitOfWork>();
+            builder.RegisterGeneric(typeof(Repository<>)).InstancePerHttpRequest().As(typeof(IRepository<>));
         }
     }
 }

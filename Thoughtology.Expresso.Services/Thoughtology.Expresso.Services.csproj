@@ -36,8 +36,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPostQueryService.cs" />
-    <Compile Include="PostQueryService.cs" />
+    <Compile Include="CommandService.cs" />
+    <Compile Include="ICommandService.cs" />
+    <Compile Include="IQueryService.cs" />
+    <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
