@@ -92,24 +92,23 @@
     <Compile Include="Web\Configuration\RepositoryModuleTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thoughtology.Expresso.Data\Thoughtology.Expresso.Data.csproj">
+    <ProjectReference Include="..\Data\Data.csproj">
       <Project>{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}</Project>
-      <Name>Thoughtology.Expresso.Data</Name>
+      <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Model\Thoughtology.Expresso.Model.csproj">
+    <ProjectReference Include="..\Model\Model.csproj">
       <Project>{EACABA32-B767-48FD-96A2-91B446A5E4B9}</Project>
-      <Name>Thoughtology.Expresso.Model</Name>
+      <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Services\Thoughtology.Expresso.Services.csproj">
+    <ProjectReference Include="..\Services\Services.csproj">
       <Project>{AA54315C-714F-4F85-9888-B6F4490663E2}</Project>
-      <Name>Thoughtology.Expresso.Services</Name>
+      <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Web\Thoughtology.Expresso.Web.csproj">
+    <ProjectReference Include="..\Web\Web.csproj">
       <Project>{6340549A-86BC-4D81-9456-5E9B227F07E8}</Project>
-      <Name>Thoughtology.Expresso.Web</Name>
+      <Name>Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

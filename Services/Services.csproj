@@ -43,13 +43,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thoughtology.Expresso.Data\Thoughtology.Expresso.Data.csproj">
+    <ProjectReference Include="..\Data\Data.csproj">
       <Project>{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}</Project>
-      <Name>Thoughtology.Expresso.Data</Name>
+      <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Model\Thoughtology.Expresso.Model.csproj">
+    <ProjectReference Include="..\Model\Model.csproj">
       <Project>{EACABA32-B767-48FD-96A2-91B446A5E4B9}</Project>
-      <Name>Thoughtology.Expresso.Model</Name>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

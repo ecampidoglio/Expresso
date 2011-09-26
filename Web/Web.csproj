@@ -168,21 +168,21 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thoughtology.Expresso.Data\Thoughtology.Expresso.Data.csproj">
-      <Project>{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}</Project>
-      <Name>Thoughtology.Expresso.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Model\Thoughtology.Expresso.Model.csproj">
-      <Project>{EACABA32-B767-48FD-96A2-91B446A5E4B9}</Project>
-      <Name>Thoughtology.Expresso.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thoughtology.Expresso.Services\Thoughtology.Expresso.Services.csproj">
-      <Project>{AA54315C-714F-4F85-9888-B6F4490663E2}</Project>
-      <Name>Thoughtology.Expresso.Services</Name>
-    </ProjectReference>
+    <Content Include="Views\Posts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Posts\Index.cshtml" />
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{D65634FD-8D03-4909-BC4E-1E3BF97CDEBE}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{EACABA32-B767-48FD-96A2-91B446A5E4B9}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{AA54315C-714F-4F85-9888-B6F4490663E2}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
