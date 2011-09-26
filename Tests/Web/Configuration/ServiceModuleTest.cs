@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Autofac;
 using Autofac.Core;
 using Thoughtology.Expresso.Services;
@@ -24,7 +23,7 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
         public void BuildContainer_ContainerHasAllExpectedServices()
         {
             // Given
-            var expectedServices = new Type[]
+            var expectedServices = new[]
             {
                 typeof(IQueryService<>),
                 typeof(ICommandService<>)

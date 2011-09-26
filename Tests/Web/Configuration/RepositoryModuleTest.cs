@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Autofac;
 using Autofac.Core;
 using Thoughtology.Expresso.Data;
@@ -24,7 +23,7 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
         public void BuildContainer_ContainerHasAllExpectedServices()
         {
             // Given
-            var expectedServices = new Type[] { typeof(IUnitOfWork), typeof(IRepository<>) };
+            var expectedServices = new[] { typeof(IUnitOfWork), typeof(IRepository<>) };
             var builder = new ContainerBuilder();
             var sut = new RepositoryModule();
 
