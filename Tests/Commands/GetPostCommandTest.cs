@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Management.Automation;
 using Microsoft.Practices.ServiceLocation;
 using Moq;
@@ -67,6 +68,42 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             Assert.Equal(posts.Count(), result.Count());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithException_ThrowsSameException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            InvalidOperationException exception)
+        {
+            // Given
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            repository.Setup(s => s.FindAll()).Throws(exception);
+            var sut = new GetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // Then
+            Assert.Throws(exception.GetType(), () => sut.Invoke<Post>().Any());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            string message,
+            InvalidOperationException innerException)
+        {
+            // Given
+            var exception = new Exception(message, innerException);
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            repository.Setup(s => s.FindAll()).Throws(exception);
+            var sut = new GetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // Then
+            Assert.Throws(innerException.GetType(), () => sut.Invoke<Post>().Any());
         }
     }
 }

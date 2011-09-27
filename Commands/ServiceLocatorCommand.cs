@@ -3,6 +3,7 @@ using System.Management.Automation;
 using Autofac;
 using AutofacContrib.CommonServiceLocator;
 using Microsoft.Practices.ServiceLocation;
+using Thoughtology.Expresso.Data;
 
 namespace Thoughtology.Expresso.Commands
 {
@@ -14,6 +15,12 @@ namespace Thoughtology.Expresso.Commands
         private IServiceLocator serviceLocator;
         private IContainer container;
         private ContainerBuilder builder;
+
+        /// <summary>
+        /// Gets or sets the connection string to use to connect to the data store.
+        /// </summary>
+        [Parameter(ValueFromPipelineByPropertyName = true)]
+        public string ConnectionString { get; set; }
 
         /// <summary>
         /// Gets the singleton <see cref="IServiceLocator"/>.
@@ -62,8 +69,25 @@ namespace Thoughtology.Expresso.Commands
         private void InitializeContainerBuilder()
         {
             builder = new ContainerBuilder();
-            builder.RegisterType<Data.DataContext>().As<Data.IUnitOfWork>();
-            builder.RegisterGeneric(typeof(Data.Repository<>)).As(typeof(Data.IRepository<>));
+            RegisterUnitOfWork();
+            RegisterRepositories();
+        }
+
+        private void RegisterUnitOfWork()
+        {
+            if (string.IsNullOrEmpty(ConnectionString))
+            {
+                builder.RegisterType<DataContext>().As<Data.IUnitOfWork>();
+            }
+            else
+            {
+                builder.Register(c => new DataContext(ConnectionString)).As<IUnitOfWork>();
+            }
+        }
+
+        private void RegisterRepositories()
+        {
+            builder.RegisterGeneric(typeof(Data.Repository<>)).As(typeof(IRepository<>));
         }
     }
 }

@@ -53,6 +53,20 @@ namespace Thoughtology.Expresso.Tests.Commands
         }
 
         [Fact]
+        public void GetServiceLocator_WithConnectionString_ReturnsDataContextWithSameConnectionString()
+        {
+            // Given
+            var connectionString = "Data Source=Expresso.sdf";
+            var sut = new ServiceLocatorCommand { ConnectionString = connectionString };
+
+            // When
+            var result = (DataContext)sut.ServiceLocator.GetInstance<IUnitOfWork>();
+
+            // Then
+            Assert.Equal(connectionString, result.Database.Connection.ConnectionString);
+        }
+
+        [Fact]
         public void SetServiceLocator_WithNull_ThrowsArgumentNullException()
         {
             // Given
