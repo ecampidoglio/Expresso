@@ -25,6 +25,20 @@ namespace Thoughtology.Expresso.Tests.Commands
         }
 
         [Fact]
+        public void Class_HasCmdletAttribute()
+        {
+            // Given
+            var expectedAttribute = new CmdletAttribute(VerbsCommon.Get, "Post");
+            var sut = typeof(GetPostCommand);
+
+            // When
+            var result = sut.GetCustomAttributes(typeof(CmdletAttribute), false);
+
+            // Then
+            Assert.Contains(expectedAttribute, result);
+        }
+
+        [Fact]
         public void Invoke_DoesNotReturnNull()
         {
             // Given
