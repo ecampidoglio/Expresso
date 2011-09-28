@@ -33,9 +33,7 @@ namespace Thoughtology.Expresso
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
 
         /// <summary>
@@ -54,6 +52,9 @@ namespace Thoughtology.Expresso
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:Application.Start"/> event.
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

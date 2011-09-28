@@ -3,6 +3,7 @@ using System.Data.Entity.Infrastructure;
 using Thoughtology.Expresso.Data;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(DatabaseInitializer), "Configure")]
+
 namespace Thoughtology.Expresso.Data
 {
     /// <summary>

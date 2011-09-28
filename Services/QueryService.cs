@@ -14,7 +14,7 @@ namespace Thoughtology.Expresso.Services
         private readonly IRepository<TEntity> repository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostQueryService"/> class.
+        /// Initializes a new instance of the <see cref="QueryService&lt;TEntity&gt;"/> class.
         /// </summary>
         /// <param name="repository">The repository.</param>
         /// <exception cref="ArgumentNullException"><paramref name="repository"/> is null.</exception>

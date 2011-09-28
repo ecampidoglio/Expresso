@@ -9,6 +9,15 @@ namespace Thoughtology.Expresso.Web.Configuration
     /// </summary>
     public class ServiceModule : Module
     {
+        /// <summary>
+        /// Adds registrations to the container.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder through which components can be registered.
+        /// </param>
+        /// <remarks>
+        /// Note that the ContainerBuilder parameter is unique to this module.
+        /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(QueryService<>)).InstancePerHttpRequest().As(typeof(IQueryService<>));

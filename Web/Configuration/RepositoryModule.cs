@@ -14,6 +14,15 @@ namespace Thoughtology.Expresso.Web.Configuration
         /// </summary>
         public string ConnectionString { get; set; }
 
+        /// <summary>
+        /// Adds registrations to the container.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder through which components can be registered.
+        /// </param>
+        /// <remarks>
+        /// Note that the ContainerBuilder parameter is unique to this module.
+        /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(c => new DataContext(ConnectionString)).InstancePerHttpRequest().As<IUnitOfWork>();

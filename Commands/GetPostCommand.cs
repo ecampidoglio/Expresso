@@ -6,6 +6,9 @@ using Thoughtology.Expresso.Model;
 
 namespace Thoughtology.Expresso.Commands
 {
+    /// <summary>
+    /// A PowerShell cmdlet that retrieves <see cref="Post"/> objects from the data store.
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "Post")]
     public class GetPostCommand : ServiceLocatorCommand
     {
@@ -13,6 +16,9 @@ namespace Thoughtology.Expresso.Commands
         private IEnumerable<Post> posts;
         private ErrorRecord errorRecord;
 
+        /// <summary>
+        /// Processes each input object from the pipeline.
+        /// </summary>
         protected override void ProcessRecord()
         {
             try

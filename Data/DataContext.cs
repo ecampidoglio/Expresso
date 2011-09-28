@@ -9,7 +9,7 @@ namespace Thoughtology.Expresso.Data
     public class DataContext : DbContext, IUnitOfWork
     {
         /// <summary>
-        /// Initializes the <see cref="DataContext"/> class.
+        /// Initializes static members of the <see cref="DataContext"/> class.
         /// </summary>
         static DataContext()
         {

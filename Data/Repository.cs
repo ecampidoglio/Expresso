@@ -62,7 +62,7 @@ namespace Thoughtology.Expresso.Data
         /// </returns>
         public IEnumerable<TEntity> FindAll(params string[] includedPropertyPaths)
         {
-            return unitOfWork.Get<TEntity>();
+            return this.unitOfWork.Get<TEntity>();
         }
 
         /// <summary>

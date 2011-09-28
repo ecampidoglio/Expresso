@@ -1,28 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using Thoughtology.Expresso.Models;
 
 namespace Thoughtology.Expresso.Controllers
 {
+    /// <summary>
+    /// Controller for all operations related to managing user accounts.
+    /// </summary>
     public class AccountController : Controller
     {
-
-        //
-        // GET: /Account/LogOn
-
+        /// <summary>
+        /// Handles Get requests for the log on action.
+        /// </summary>
+        /// <returns>The appropriate view for the action.</returns>
         public ActionResult LogOn()
         {
             return View();
         }
 
-        //
-        // POST: /Account/LogOn
-
+        /// <summary>
+        /// Handles Post requests for the log on action.
+        /// </summary>
+        /// <param name="model">The Post request payload mapped into a model object.</param>
+        /// <param name="returnUrl">The URL to redirect the client to after the user has been logged on.</param>
+        /// <returns>The appropriate view for the action.</returns>
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -43,7 +45,7 @@ namespace Thoughtology.Expresso.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError(String.Empty, "The user name or password provided is incorrect.");
                 }
             }
 
@@ -51,9 +53,10 @@ namespace Thoughtology.Expresso.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/LogOff
-
+        /// <summary>
+        /// Handles Get requests for the log off action.
+        /// </summary>
+        /// <returns>The appropriate view for the action.</returns>
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -61,17 +64,20 @@ namespace Thoughtology.Expresso.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
+        /// <summary>
+        /// Handles Get requests for the register action.
+        /// </summary>
+        /// <returns>The appropriate view for the action.</returns>
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
-
+        /// <summary>
+        /// Handles Post requests for the register action.
+        /// </summary>
+        /// <param name="model">The Post request payload mapped into a model object.</param>
+        /// <returns>The appropriate view for the action.</returns>
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
@@ -88,7 +94,7 @@ namespace Thoughtology.Expresso.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                    ModelState.AddModelError(String.Empty, ErrorCodeToString(createStatus));
                 }
             }
 
@@ -96,31 +102,33 @@ namespace Thoughtology.Expresso.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePassword
-
+        /// <summary>
+        /// Handles Get requests for the change password action.
+        /// </summary>
+        /// <returns>The appropriate view for the action.</returns>
         [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ChangePassword
-
+        /// <summary>
+        /// Handles Post requests for the change password action.
+        /// </summary>
+        /// <param name="model">The Post request payload mapped into a model object.</param>
+        /// <returns>The appropriate view for the action.</returns>
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-
                 // ChangePassword will throw an exception rather
                 // than return false in certain failure scenarios.
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                    var currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
                     changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 }
                 catch (Exception)
@@ -134,7 +142,7 @@ namespace Thoughtology.Expresso.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    ModelState.AddModelError(String.Empty, "The current password is incorrect or the new password is invalid.");
                 }
             }
 
@@ -142,15 +150,15 @@ namespace Thoughtology.Expresso.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePasswordSuccess
-
+        /// <summary>
+        /// Handles Get requests for the change password action.
+        /// </summary>
+        /// <returns>The appropriate view for the action.</returns>
         public ActionResult ChangePasswordSuccess()
         {
             return View();
         }
 
-        #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
@@ -188,6 +196,5 @@ namespace Thoughtology.Expresso.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
     }
 }
