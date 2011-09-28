@@ -39,7 +39,9 @@ namespace Thoughtology.Expresso.Tests.Commands
 
         [Theory]
         [AutoMoqData]
-        public void Invoke_WithNoPosts_ReturnsEmptySequenceOfPost(Mock<IServiceLocator> serviceLocator, Mock<IRepository<Post>> repository)
+        public void Invoke_WithNoPosts_ReturnsEmptySequenceOfPost(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -55,7 +57,10 @@ namespace Thoughtology.Expresso.Tests.Commands
 
         [Theory]
         [AutoMoqData]
-        public void Invoke_WithSomePosts_ReturnsSameNumberOfPosts(Mock<IServiceLocator> serviceLocator, Mock<IRepository<Post>> repository, Post[] posts)
+        public void Invoke_WithSomePosts_ReturnsSameNumberOfPosts(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            Post[] posts)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);

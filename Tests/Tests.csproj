@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Commands\ErrorRecordFactoryTest.cs" />
     <Compile Include="Commands\GetPostCommandTest.cs" />
+    <Compile Include="Commands\NewPostCommandTest.cs" />
     <Compile Include="Commands\ServiceLocatorCommandTest.cs" />
     <Compile Include="Data\DataContextTest.cs" />
     <Compile Include="Data\RepositoryTest.cs" />

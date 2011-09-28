@@ -1,4 +1,7 @@
-﻿namespace Thoughtology.Expresso.Model
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Thoughtology.Expresso.Model
 {
     /// <summary>
     /// Represents a blog post that is either published or in draft. 
@@ -8,7 +11,14 @@
         /// <summary>
         /// Gets or sets the unique numeric identifier.
         /// </summary>
+        [Key]
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title of the post.
+        /// </summary>
+        [Required]
+        public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the Markdown-formatted blog post content. 
@@ -16,8 +26,17 @@
         public string MarkdownContent { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the blog post is published or in draft.
+        /// Gets or sets the timestamp when the post was last modified.
         /// </summary>
-        public bool IsPublished { get; set; }
+        public DateTime ModifiedTimestamp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the timestamp when the post was published.
+        /// </summary>
+        /// <remarks>
+        /// If this property is <see langref="null"/> the post is currently a draft
+        /// and is not visible on the web site.
+        /// </remarks>
+        public DateTime? PublishedTimestamp { get; set; }
     }
 }

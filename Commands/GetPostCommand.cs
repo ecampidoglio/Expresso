@@ -14,7 +14,6 @@ namespace Thoughtology.Expresso.Commands
     {
         private IRepository<Post> repository;
         private IEnumerable<Post> posts;
-        private ErrorRecord errorRecord;
 
         /// <summary>
         /// Processes each input object from the pipeline.
@@ -24,12 +23,11 @@ namespace Thoughtology.Expresso.Commands
             try
             {
                 FindAllPosts();
-                WriteObject(posts, enumerateCollection: true);
+                SendPostsToPipeline();
             }
             catch (Exception e)
             {
-                ConvertExceptionToErrorRecord(e);
-                ThrowTerminatingError(errorRecord);
+                ThrowError(e);
             }
         }
 
@@ -44,26 +42,9 @@ namespace Thoughtology.Expresso.Commands
             repository = ServiceLocator.GetInstance<IRepository<Post>>();
         }
 
-        private void ConvertExceptionToErrorRecord(Exception exception)
+        private void SendPostsToPipeline()
         {
-            if (exception.InnerException != null)
-            {
-                CreateErrorRecordFromInnerException(exception);
-            }
-            else
-            {
-                CreateErrorRecordFromException(exception);
-            }
-        }
-
-        private void CreateErrorRecordFromInnerException(Exception exception)
-        {
-            errorRecord = ErrorRecordFactory.CreateFromException(exception.InnerException, ErrorCategory.InvalidOperation);
-        }
-
-        private void CreateErrorRecordFromException(Exception exception)
-        {
-            errorRecord = ErrorRecordFactory.CreateFromException(exception);
+            WriteObject(posts, enumerateCollection: true);
         }
     }
 }

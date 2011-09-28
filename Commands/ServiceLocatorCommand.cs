@@ -15,6 +15,7 @@ namespace Thoughtology.Expresso.Commands
         private IServiceLocator serviceLocator;
         private IContainer container;
         private ContainerBuilder builder;
+        private ErrorRecord errorRecord;
 
         /// <summary>
         /// Gets or sets the connection string to use to connect to the data store.
@@ -54,6 +55,16 @@ namespace Thoughtology.Expresso.Commands
             serviceLocator = instance;
         }
 
+        /// <summary>
+        /// Throws the specified <see cref="Exception"/> as a terminating error for the cmdlet.
+        /// </summary>
+        /// <param name="e">The <see cref="Exception"/> to throw.</param>
+        protected void ThrowError(Exception e)
+        {
+            ConvertExceptionToErrorRecord(e);
+            ThrowTerminatingError(errorRecord);
+        }
+
         private void InitializeServiceLocator()
         {
             InitializeContainer();
@@ -88,6 +99,28 @@ namespace Thoughtology.Expresso.Commands
         private void RegisterRepositories()
         {
             builder.RegisterGeneric(typeof(Data.Repository<>)).As(typeof(IRepository<>));
+        }
+
+        private void ConvertExceptionToErrorRecord(Exception exception)
+        {
+            if (exception.InnerException != null)
+            {
+                CreateErrorRecordFromInnerException(exception);
+            }
+            else
+            {
+                CreateErrorRecordFromException(exception);
+            }
+        }
+
+        private void CreateErrorRecordFromException(Exception exception)
+        {
+            errorRecord = ErrorRecordFactory.CreateFromException(exception);
+        }
+
+        private void CreateErrorRecordFromInnerException(Exception exception)
+        {
+            errorRecord = ErrorRecordFactory.CreateFromException(exception.InnerException, ErrorCategory.InvalidOperation);
         }
     }
 }
