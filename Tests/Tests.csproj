@@ -91,6 +91,7 @@
     <Compile Include="Commands\GetPostCommandTest.cs" />
     <Compile Include="Commands\NewPostCommandTest.cs" />
     <Compile Include="Commands\ServiceLocatorCommandTest.cs" />
+    <Compile Include="Commands\SetPostCommandTest.cs" />
     <Compile Include="Data\DataContextTest.cs" />
     <Compile Include="Data\RepositoryTest.cs" />
     <Compile Include="Foundation\AutoMoqDataAttribute.cs" />

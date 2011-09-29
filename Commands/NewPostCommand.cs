@@ -33,14 +33,20 @@ namespace Thoughtology.Expresso.Commands
         {
             try
             {
-                VerifyParameters();
-                PersistNewPost();
-                SendNewPostToPipeline();
+                CreateNewPost();
             }
             catch (Exception e)
             {
                 ThrowError(e);
             }
+        }
+
+        private void CreateNewPost()
+        {
+            VerifyParameters();
+            CreateNewPostFromParameters();
+            SaveNewPost();
+            SendNewPostToPipeline();
         }
 
         private void VerifyParameters()
@@ -49,12 +55,6 @@ namespace Thoughtology.Expresso.Commands
             {
                 throw new ArgumentException("Title is required", "Title");
             }
-        }
-
-        private void PersistNewPost()
-        {
-            CreateNewPostFromParameters();
-            SaveNewPost();
         }
 
         private void CreateNewPostFromParameters()
