@@ -65,6 +65,7 @@ namespace Thoughtology.Expresso.Commands
         private void ModifyPost()
         {
             SetActivePost();
+            VerifyActivePostExists();
             ModifyActivePostFromParameters();
             SaveActivePost();
             SendActivePostToPipeline();
@@ -96,6 +97,14 @@ namespace Thoughtology.Expresso.Commands
         private void InitializeRepository()
         {
             repository = ServiceLocator.GetInstance<IRepository<Post>>();
+        }
+
+        private void VerifyActivePostExists()
+        {
+            if (activePost == null)
+            {
+                throw new ArgumentException(String.Format("Could not find a post with ID '{0}'", Id));
+            }
         }
 
         private void ModifyActivePostFromParameters()

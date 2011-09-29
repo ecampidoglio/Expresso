@@ -130,17 +130,21 @@ namespace Thoughtology.Expresso.Tests.Commands
 
         [Theory]
         [AutoMoqData]
-        public void Invoke_WithNullInputObject_DoesNotThrow(
+        public void Invoke_WithNullInputObjectAndId_DoesNotThrow(
             Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository)
+            Mock<IRepository<Post>> repository,
+            Post post)
         {
             // Given
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
             sut.SetServiceLocator(serviceLocator.Object);
 
             // When
             sut.InputObject = null;
+            sut.Id = post.Id;
 
             // Then
             Assert.DoesNotThrow(() => sut.Invoke<Post>().Any());
@@ -376,6 +380,90 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(post));
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithIdThatDoesNotExist_ThrowsArgumentException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            int postId)
+        {
+            // Given
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            var sut = new SetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // When
+            sut.Id = postId;
+
+            // Then
+            Assert.Throws<ArgumentException>(() => sut.Invoke<Post>().Any());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithIdThatDoesNotExistAndTitle_ThrowsArgumentException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            int postId,
+            string title)
+        {
+            // Given
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            var sut = new SetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // When
+            sut.Id = postId;
+            sut.Title = title;
+
+            // Then
+            Assert.Throws<ArgumentException>(() => sut.Invoke<Post>().Any());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithException_ThrowsSameException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            InvalidOperationException exception,
+            int postId)
+        {
+            // Given
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Throws(exception);
+            var sut = new SetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // When
+            sut.Id = postId;
+
+            // Then
+            Assert.Throws(exception.GetType(), () => sut.Invoke<Post>().Any());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
+            Mock<IServiceLocator> serviceLocator,
+            Mock<IRepository<Post>> repository,
+            int postId,
+            string message,
+            InvalidOperationException innerException)
+        {
+            // Given
+            var exception = new Exception(message, innerException);
+            serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
+            repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Throws(exception);
+            var sut = new SetPostCommand();
+            sut.SetServiceLocator(serviceLocator.Object);
+
+            // When
+            sut.Id = postId;
+
+            // Then
+            Assert.Throws(innerException.GetType(), () => sut.Invoke<Post>().Any());
         }
     }
 }
