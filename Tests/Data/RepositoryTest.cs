@@ -76,5 +76,51 @@ namespace Thoughtology.Expresso.Tests.Data
             // Then
             Assert.Equal(dbSet.Count(), result.Count());
         }
+
+        [Theory]
+        [AutoMoqData]
+        public void Save_WithNullEntity_ThrowsArgumentNullException(
+            Mock<IUnitOfWork> unitOfWork)
+        {
+            // Given
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // Then
+            Assert.Throws<ArgumentNullException>(() => sut.Save(null));
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Save_WithEntity_AddsEntityToUnitOfWork(
+            Mock<IUnitOfWork> unitOfWork,
+            DbSetStub<object> dbSet,
+            object entity)
+        {
+            // Given
+            unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // When
+            sut.Save(entity);
+
+            // Then
+            Assert.Contains(entity, dbSet);
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Save_WithEntity_CommitsUnitOfWork(
+            Mock<IUnitOfWork> unitOfWork,
+            object entity)
+        {
+            // Given
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // When
+            sut.Save(entity);
+
+            // Then
+            unitOfWork.Verify(m => m.Commit());
+        }
     }
 }
