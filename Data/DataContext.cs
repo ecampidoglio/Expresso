@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data;
+using System.Data.Entity;
 using Thoughtology.Expresso.Model;
 
 namespace Thoughtology.Expresso.Data
@@ -48,6 +50,25 @@ namespace Thoughtology.Expresso.Data
         public IDbSet<TEntity> Get<TEntity>() where TEntity : class
         {
             return Set<TEntity>();
+        }
+
+        /// <summary>
+        /// Retrieves the <see cref="EntityState"/> of the specified entity.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity to retrieve the status for.</typeparam>
+        /// <param name="entity">The entity instance to retrieve the status for.</param>
+        /// <returns>
+        /// A member of the <see cref="EntityState"/> enumeration.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        public EntityState GetState<TEntity>(TEntity entity) where TEntity : class
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            return Entry(entity).State;
         }
 
         /// <summary>

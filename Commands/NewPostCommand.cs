@@ -17,13 +17,18 @@ namespace Thoughtology.Expresso.Commands
         /// <summary>
         /// Gets or sets the title of the post.
         /// </summary>
-        [Parameter(Position = 0, Mandatory = true)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true)]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the content of the post.
         /// </summary>
-        [Parameter(Position = 1)]
+        [Parameter(
+            Position = 1,
+            ValueFromPipelineByPropertyName = true)]
         public string Content { get; set; }
 
         /// <summary>
