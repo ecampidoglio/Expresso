@@ -14,10 +14,13 @@
                                 <PropertyName>Id</PropertyName>
                             </ListItem>
                             <ListItem>
-                                <PropertyName>IsPublished</PropertyName>
+                                <PropertyName>MarkdownContent</PropertyName>
                             </ListItem>
                             <ListItem>
-                                <PropertyName>MarkdownContent</PropertyName>
+                                <PropertyName>ModifiedTimestamp</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>PublishedTimestamp</PropertyName>
                             </ListItem>
                         </ListItems>
                     </ListEntry>

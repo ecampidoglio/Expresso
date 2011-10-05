@@ -3,9 +3,8 @@
 }
 <h2>Posts</h2>
 
-<ul>
 @foreach (var post in ViewBag.Posts)
 {
-    <li>@post.Title</li>
+    <h3>@post.Title</h3>
+    <p>@post.MarkdownContent</p>
 }
-</ul>

@@ -9,6 +9,14 @@ namespace Thoughtology.Expresso.Model
     public class Post
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Post"/> class.
+        /// </summary>
+        public Post()
+        {
+            this.ModifiedTimestamp = DateTime.Now;
+        }
+
+        /// <summary>
         /// Gets or sets the unique numeric identifier.
         /// </summary>
         [Key]
