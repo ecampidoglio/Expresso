@@ -9,7 +9,7 @@ namespace Thoughtology.Expresso.Data
     /// </summary>
     /// <typeparam name="TEntity">The type of entity instances to access.</typeparam>
     public interface IRepository<TEntity>
-        where TEntity : class
+        where TEntity: class
     {
         /// <summary>
         /// Retrieves all instances of the specified <typeparamref name="TEntity"/> type matching the specified criteria.
@@ -25,8 +25,8 @@ namespace Thoughtology.Expresso.Data
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="criteria"/> is null.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
-            "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "This syntax is required by 'Expression<TDelegate>' lambda expressions")]
+        "CA1006:DoNotNestGenericTypesInMemberSignatures",
+        Justification = "This syntax is required by 'Expression<TDelegate>' lambda expressions")]
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> criteria, params string[] includedPropertyPaths);
 
         /// <summary>

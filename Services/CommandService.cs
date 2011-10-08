@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Thoughtology.Expresso.Data;
 
 namespace Thoughtology.Expresso.Services
@@ -8,7 +8,7 @@ namespace Thoughtology.Expresso.Services
     /// </summary>
     /// <typeparam name="TEntity">The type of the entities involved in the commands.</typeparam>
     public class CommandService<TEntity> : Thoughtology.Expresso.Services.ICommandService<TEntity>
-        where TEntity : class
+        where TEntity: class
     {
         private readonly IRepository<TEntity> repository;
 

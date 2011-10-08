@@ -72,8 +72,8 @@ namespace Thoughtology.Expresso.Tests.Commands
         [InlineAutoData(ErrorCategory.SyntaxError)]
         [InlineAutoData(ErrorCategory.OperationTimeout)]
         public void CreateFromException_WithExceptionAndErrorCategory_ReturnsErrorRecordWithSameErrorCategory(
-            ErrorCategory errorCategory,
-            Exception exception)
+        ErrorCategory errorCategory,
+        Exception exception)
         {
             // When
             var result = ErrorRecordFactory.CreateFromException(exception, errorCategory);
@@ -85,8 +85,8 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoData]
         public void CreateFromException_WithExceptionAndTarget_ReturnsErrorRecordWithSameTarget(
-            Exception exception,
-            object target)
+        Exception exception,
+        object target)
         {
             // When
             var result = ErrorRecordFactory.CreateFromException(exception, targetObject: target);

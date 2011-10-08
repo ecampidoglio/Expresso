@@ -54,8 +54,8 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNoPosts_ReturnsEmptySequenceOfPost(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -72,9 +72,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithSomePosts_ReturnsSameNumberOfPosts(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post[] posts)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post[] posts)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -92,9 +92,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            InvalidOperationException exception)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        InvalidOperationException exception)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -109,10 +109,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string message,
-            InvalidOperationException innerException)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string message,
+        InvalidOperationException innerException)
         {
             // Given
             var exception = new Exception(message, innerException);

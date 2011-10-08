@@ -92,8 +92,8 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         [Theory]
         [AutoMoqData]
         public void Index_WithSomePosts_ReturnsViewWithSameNumberOfItemsInPostsSequenceInViewBag(
-            Mock<IQueryService<Post>> postQueryService,
-            Post[] posts)
+        Mock<IQueryService<Post>> postQueryService,
+        Post[] posts)
         {
             // Given
             postQueryService.Setup(s => s.Find()).Returns(posts);

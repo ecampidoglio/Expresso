@@ -16,7 +16,7 @@ namespace Thoughtology.Expresso.Tests.Foundation
         /// </summary>
         public AutoMoqDataAttribute()
             : base(new Fixture().Customize(
-                new AutoMoqCustomization()))
+            new AutoMoqCustomization()))
         {
         }
 
@@ -26,7 +26,7 @@ namespace Thoughtology.Expresso.Tests.Foundation
         /// <param name="fixtureType">Type of the fixture.</param>
         public AutoMoqDataAttribute(Type fixtureType)
             : base(((IFixture)Activator.CreateInstance(fixtureType)).Customize(
-                new AutoMoqCustomization()))
+            new AutoMoqCustomization()))
         {
         }
 
@@ -36,7 +36,7 @@ namespace Thoughtology.Expresso.Tests.Foundation
         /// <param name="fixture">The <see cref="IFixture"/> instance.</param>
         public AutoMoqDataAttribute(IFixture fixture)
             : base(fixture.Customize(
-                new AutoMoqCustomization()))
+            new AutoMoqCustomization()))
         {
         }
     }

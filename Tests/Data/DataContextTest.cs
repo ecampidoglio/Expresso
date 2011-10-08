@@ -75,7 +75,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPosts_WithNewItem_ReturnsCollectionWithOneElement([Frozen]Post post, [Frozen]string databaseName)
+        public void GetPosts_WithNewItem_ReturnsCollectionWithOneElement([Frozen] Post post, [Frozen] string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -93,7 +93,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithNullItem_ThrowsArgumentNullException([Frozen]string databaseName)
+        public void GetPostState_WithNullItem_ThrowsArgumentNullException([Frozen] string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -106,7 +106,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithDetachedItem_ReturnsDetachedState([Frozen]Post post, [Frozen]string databaseName)
+        public void GetPostState_WithDetachedItem_ReturnsDetachedState([Frozen] Post post, [Frozen] string databaseName)
         {
             // Given
             var expectedState = EntityState.Detached;
@@ -123,7 +123,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithTransientItem_ReturnsDetachedState([Frozen]Post post, [Frozen]string databaseName)
+        public void GetPostState_WithTransientItem_ReturnsDetachedState([Frozen] Post post, [Frozen] string databaseName)
         {
             // Given
             post.Id = 0;

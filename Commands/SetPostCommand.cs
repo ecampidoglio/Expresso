@@ -19,19 +19,19 @@ namespace Thoughtology.Expresso.Commands
         /// Gets or sets the post to modify.
         /// </summary>
         [Parameter(
-            ParameterSetName = "InputObject",
-            Mandatory = true,
-            ValueFromPipeline = true)]
+        ParameterSetName = "InputObject",
+        Mandatory = true,
+        ValueFromPipeline = true)]
         public Post InputObject { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier of the post to modify.
         /// </summary>
         [Parameter(
-            ParameterSetName = "PostId",
-            Mandatory = true,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
+        ParameterSetName = "PostId",
+        Mandatory = true,
+        ValueFromPipeline = true,
+        ValueFromPipelineByPropertyName = true)]
         [Alias("PostId")]
         public int Id { get; set; }
 

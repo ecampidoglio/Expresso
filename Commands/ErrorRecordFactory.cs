@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Management.Automation;
 
 namespace Thoughtology.Expresso.Commands
@@ -16,9 +16,9 @@ namespace Thoughtology.Expresso.Commands
         /// <param name="targetObject">The optional target object. The default value is <see langword="null"/>.</param>
         /// <returns>An <see cref="ErrorRecord"/> object.</returns>
         public static ErrorRecord CreateFromException(
-            Exception exception,
-            ErrorCategory errorCategory = ErrorCategory.NotSpecified,
-            object targetObject = null)
+        Exception exception,
+        ErrorCategory errorCategory = ErrorCategory.NotSpecified,
+        object targetObject = null)
         {
             if (exception == null)
             {

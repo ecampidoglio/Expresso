@@ -61,9 +61,9 @@ namespace Thoughtology.Expresso.Tests.Data
         [Theory]
         [AutoMoqData]
         public void FindAll_WithSomeItems_ReturnsSameNumberOfItems(
-            Mock<IUnitOfWork> unitOfWork,
-            DbSetStub<object> dbSet,
-            object[] entities)
+        Mock<IUnitOfWork> unitOfWork,
+        DbSetStub<object> dbSet,
+        object[] entities)
         {
             // Given
             dbSet.Entities = entities;
@@ -80,7 +80,7 @@ namespace Thoughtology.Expresso.Tests.Data
         [Theory]
         [AutoMoqData]
         public void Save_WithNullEntity_ThrowsArgumentNullException(
-            Mock<IUnitOfWork> unitOfWork)
+        Mock<IUnitOfWork> unitOfWork)
         {
             // Given
             var sut = new Repository<object>(unitOfWork.Object);
@@ -92,9 +92,9 @@ namespace Thoughtology.Expresso.Tests.Data
         [Theory]
         [AutoMoqData]
         public void Save_WithEntity_AddsEntityToUnitOfWork(
-            Mock<IUnitOfWork> unitOfWork,
-            DbSetStub<object> dbSet,
-            object entity)
+        Mock<IUnitOfWork> unitOfWork,
+        DbSetStub<object> dbSet,
+        object entity)
         {
             // Given
             unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
@@ -110,8 +110,8 @@ namespace Thoughtology.Expresso.Tests.Data
         [Theory]
         [AutoMoqData]
         public void Save_WithEntity_CommitsUnitOfWork(
-            Mock<IUnitOfWork> unitOfWork,
-            object entity)
+        Mock<IUnitOfWork> unitOfWork,
+        object entity)
         {
             // Given
             var sut = new Repository<object>(unitOfWork.Object);

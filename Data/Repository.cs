@@ -10,7 +10,7 @@ namespace Thoughtology.Expresso.Data
     /// </summary>
     /// <typeparam name="TEntity">The type of entity instances to access.</typeparam>
     public class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : class
+        where TEntity: class
     {
         private readonly IUnitOfWork unitOfWork;
 

@@ -30,7 +30,7 @@ namespace Thoughtology.Expresso.Tests.Web.Services
 
         [Theory]
         [AutoData]
-        public void ConvertToHtml_WithMarkdownText_ReturnsHtmlPText([Frozen]string text)
+        public void ConvertToHtml_WithMarkdownText_ReturnsHtmlPText([Frozen] string text)
         {
             var source = text;
             var expectedResult = String.Format("<p>{0}</p>\n", text);
@@ -43,7 +43,7 @@ namespace Thoughtology.Expresso.Tests.Web.Services
 
         [Theory]
         [AutoData]
-        public void ConvertToHtml_WithMarkdownH1Text_ReturnsHtmlH1Text([Frozen]string text)
+        public void ConvertToHtml_WithMarkdownH1Text_ReturnsHtmlH1Text([Frozen] string text)
         {
             var source = String.Format("# {0}", text);
             var expectedResult = String.Format("<h1>{0}</h1>\n", text);
@@ -56,7 +56,7 @@ namespace Thoughtology.Expresso.Tests.Web.Services
 
         [Theory]
         [AutoData]
-        public void ConvertToHtml_WithMarkdownH2Text_ReturnsHtmlH2Text([Frozen]string text)
+        public void ConvertToHtml_WithMarkdownH2Text_ReturnsHtmlH2Text([Frozen] string text)
         {
             var source = String.Format("## {0}", text);
             var expectedResult = String.Format("<h2>{0}</h2>\n", text);
@@ -69,7 +69,7 @@ namespace Thoughtology.Expresso.Tests.Web.Services
 
         [Theory]
         [AutoData]
-        public void ConvertToHtml_WithMarkdownBoldText_ReturnsHtmlBoldText([Frozen]string text)
+        public void ConvertToHtml_WithMarkdownBoldText_ReturnsHtmlBoldText([Frozen] string text)
         {
             var source = String.Format("**{0}**", text);
             var expectedResult = String.Format("<p><strong>{0}</strong></p>\n", text);
@@ -82,7 +82,7 @@ namespace Thoughtology.Expresso.Tests.Web.Services
 
         [Theory]
         [AutoData]
-        public void ConvertToHtml_WithMarkdownItalicText_ReturnsHtmlItalicText([Frozen]string text)
+        public void ConvertToHtml_WithMarkdownItalicText_ReturnsHtmlItalicText([Frozen] string text)
         {
             var source = String.Format("*{0}*", text);
             var expectedResult = String.Format("<p><em>{0}</em></p>\n", text);

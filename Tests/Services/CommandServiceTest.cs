@@ -51,9 +51,9 @@ namespace Thoughtology.Expresso.Tests.Services
         [Theory]
         [AutoMoqData]
         public void Save_WithEntity_DelegatesToRepository(
-            Mock<IUnitOfWork> unitOfWork,
-            Mock<IRepository> repository,
-            object entity)
+        Mock<IUnitOfWork> unitOfWork,
+        Mock<IRepository> repository,
+        object entity)
         {
             // Given
             var sut = new CommandService<object>(unitOfWork.Object, repository.Object);

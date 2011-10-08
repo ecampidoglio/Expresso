@@ -69,9 +69,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObject_ReturnsInputObject(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -89,12 +89,12 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithId_ReturnsPostWithSameId(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -111,9 +111,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObject_SavesInputObject(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -131,12 +131,12 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNullInputObjectAndId_DoesNotThrow(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -153,10 +153,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndTitle_SavesInputObjectWithNewTitle(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -170,15 +170,15 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.Title == title)));
+            p => p.Id == post.Id && p.Title == title)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndNullTitle_SavesInputObjectWithNotNullTitle(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -192,16 +192,16 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.Title != null)));
+            p => p.Id == post.Id && p.Title != null)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndContent_SavesInputObjectWithNewContent(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post,
-            string content)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post,
+        string content)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -215,15 +215,15 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.MarkdownContent == content)));
+            p => p.Id == post.Id && p.MarkdownContent == content)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndNullContent_SavesInputObjectWithNotNullContent(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -237,18 +237,18 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.MarkdownContent != null)));
+            p => p.Id == post.Id && p.MarkdownContent != null)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithId_SavesPostWithSameId(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -265,13 +265,13 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndTitle_SavesPostWithSameIdAndTitle(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post,
+        string title)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -284,18 +284,18 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.Title == title)));
+            p => p.Id == post.Id && p.Title == title)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndNullTitle_SavesPostWithSameIdAndNotNullTitle(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -308,19 +308,19 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.Title != null)));
+            p => p.Id == post.Id && p.Title != null)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndContent_SavesPostWithSameIdAndContent(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post,
-            string content)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post,
+        string content)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -333,18 +333,18 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.MarkdownContent == content)));
+            p => p.Id == post.Id && p.MarkdownContent == content)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndNullContent_SavesPostWithSameIdAndNotNullContent(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post)
         {
             // Given
-            var posts = new[] { post };
+            var posts = new [] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -357,16 +357,16 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             repository.Verify(m => m.Save(It.Is<Post>(
-                p => p.Id == post.Id && p.MarkdownContent != null)));
+            p => p.Id == post.Id && p.MarkdownContent != null)));
         }
 
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndId_SavesInputObject(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            Post post,
-            int anotherPostId)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        Post post,
+        int anotherPostId)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -385,9 +385,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdThatDoesNotExist_ThrowsArgumentException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            int postId)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        int postId)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -404,10 +404,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdThatDoesNotExistAndTitle_ThrowsArgumentException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            int postId,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        int postId,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -425,10 +425,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            InvalidOperationException exception,
-            int postId)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        InvalidOperationException exception,
+        int postId)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -446,11 +446,11 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            int postId,
-            string message,
-            InvalidOperationException innerException)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        int postId,
+        string message,
+        InvalidOperationException innerException)
         {
             // Given
             var exception = new Exception(message, innerException);

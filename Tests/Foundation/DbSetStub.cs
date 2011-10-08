@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Thoughtology.Expresso.Tests.Foundation
 {
     public class DbSetStub<TEntity> : IDbSet<TEntity>
-        where TEntity : class
+        where TEntity: class
     {
         public DbSetStub()
         {
@@ -18,22 +18,34 @@ namespace Thoughtology.Expresso.Tests.Foundation
 
         public ObservableCollection<TEntity> Local
         {
-            get { return new ObservableCollection<TEntity>(Entities); }
+            get
+            {
+                return new ObservableCollection<TEntity>(Entities);
+            }
         }
 
         public Type ElementType
         {
-            get { return Entities.AsQueryable().ElementType; }
+            get
+            {
+                return Entities.AsQueryable().ElementType;
+            }
         }
 
         public Expression Expression
         {
-            get { return Entities.AsQueryable().Expression; }
+            get
+            {
+                return Entities.AsQueryable().Expression;
+            }
         }
 
         public IQueryProvider Provider
         {
-            get { return Entities.AsQueryable().Provider; }
+            get
+            {
+                return Entities.AsQueryable().Provider;
+            }
         }
 
         internal ICollection<TEntity> Entities { get; set; }
@@ -49,7 +61,8 @@ namespace Thoughtology.Expresso.Tests.Foundation
             return entity;
         }
 
-        public TDerivedEntity Create<TDerivedEntity>() where TDerivedEntity : class, TEntity
+        public TDerivedEntity Create<TDerivedEntity>()
+            where TDerivedEntity: class, TEntity
         {
             return Activator.CreateInstance<TDerivedEntity>();
         }

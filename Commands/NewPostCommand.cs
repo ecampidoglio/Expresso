@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Management.Automation;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
@@ -18,17 +18,17 @@ namespace Thoughtology.Expresso.Commands
         /// Gets or sets the title of the post.
         /// </summary>
         [Parameter(
-            Position = 0,
-            Mandatory = true,
-            ValueFromPipelineByPropertyName = true)]
+        Position = 0,
+        Mandatory = true,
+        ValueFromPipelineByPropertyName = true)]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the content of the post.
         /// </summary>
         [Parameter(
-            Position = 1,
-            ValueFromPipelineByPropertyName = true)]
+        Position = 1,
+        ValueFromPipelineByPropertyName = true)]
         public string Content { get; set; }
 
         /// <summary>
@@ -64,11 +64,8 @@ namespace Thoughtology.Expresso.Commands
 
         private void CreateNewPostFromParameters()
         {
-            newPost = new Post
-            {
-                Title = Title,
-                MarkdownContent = Content
-            };
+            newPost = new Post { Title = Title,
+            MarkdownContent = Content };
         }
 
         private void SaveNewPost()

@@ -39,7 +39,10 @@ namespace Thoughtology.Expresso.Data
         /// </summary>
         public IDbSet<Post> Posts
         {
-            get { return Get<Post>(); }
+            get
+            {
+                return Get<Post>();
+            }
         }
 
         /// <summary>
@@ -47,7 +50,8 @@ namespace Thoughtology.Expresso.Data
         /// </summary>
         /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
         /// <returns>The set of entities.</returns>
-        public IDbSet<TEntity> Get<TEntity>() where TEntity : class
+        public IDbSet<TEntity> Get<TEntity>()
+            where TEntity: class
         {
             return Set<TEntity>();
         }
@@ -61,7 +65,8 @@ namespace Thoughtology.Expresso.Data
         /// A member of the <see cref="EntityState"/> enumeration.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
-        public EntityState GetState<TEntity>(TEntity entity) where TEntity : class
+        public EntityState GetState<TEntity>(TEntity entity)
+            where TEntity: class
         {
             if (entity == null)
             {

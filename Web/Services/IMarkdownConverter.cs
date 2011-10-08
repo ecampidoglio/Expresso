@@ -1,4 +1,4 @@
-namespace Thoughtology.Expresso.Web.Services
+﻿namespace Thoughtology.Expresso.Web.Services
 {
     /// <summary>
     /// Defines the role of a Markdown to HTML text converter.

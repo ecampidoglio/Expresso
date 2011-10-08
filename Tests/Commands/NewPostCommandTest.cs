@@ -54,9 +54,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_DelegatesToRepository(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -74,8 +74,8 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNullTitle_ThrowsArgumentException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -92,10 +92,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithContent_DelegatesToRepository(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title,
-            string content)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title,
+        string content)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -114,9 +114,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_ReturnsSinglePost(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -134,9 +134,9 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_ReturnsSinglePostWithSameTitle(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -154,10 +154,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithContent_ReturnsSinglePostWithSameContent(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title,
-            string content)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title,
+        string content)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -176,10 +176,10 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            InvalidOperationException exception,
-            string title)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        InvalidOperationException exception,
+        string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
@@ -195,11 +195,11 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-            Mock<IServiceLocator> serviceLocator,
-            Mock<IRepository<Post>> repository,
-            string title,
-            string message,
-            InvalidOperationException innerException)
+        Mock<IServiceLocator> serviceLocator,
+        Mock<IRepository<Post>> repository,
+        string title,
+        string message,
+        InvalidOperationException innerException)
         {
             // Given
             var exception = new Exception(message, innerException);

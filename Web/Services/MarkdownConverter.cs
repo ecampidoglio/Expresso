@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MarkdownSharp;
 
 namespace Thoughtology.Expresso.Web.Services
