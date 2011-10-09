@@ -7,7 +7,7 @@ namespace Thoughtology.Expresso.Services
     /// </summary>
     /// <typeparam name="TEntity">The type of the entities to retrieve.</typeparam>
     public interface IQueryService<TEntity>
-        where TEntity: class
+        where TEntity : class
     {
         /// <summary>
         /// Retrieves all <typeparamref name="TEntity"/> entities.

@@ -94,7 +94,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Post post)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -136,7 +136,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Post post)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -248,7 +248,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Post post)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -271,7 +271,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         string title)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -295,7 +295,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Post post)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -320,7 +320,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         string content)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
@@ -344,7 +344,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Post post)
         {
             // Given
-            var posts = new [] { post };
+            var posts = new[] { post };
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();

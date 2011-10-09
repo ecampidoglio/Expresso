@@ -64,8 +64,7 @@ namespace Thoughtology.Expresso.Commands
 
         private void CreateNewPostFromParameters()
         {
-            newPost = new Post { Title = Title,
-            MarkdownContent = Content };
+            newPost = new Post { Title = Title, MarkdownContent = Content };
         }
 
         private void SaveNewPost()

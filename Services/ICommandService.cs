@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="TEntity">The type of the entities involved in the commands.</typeparam>
     public interface ICommandService<TEntity>
-        where TEntity: class
+        where TEntity : class
     {
         /// <summary>
         /// Persists the contents of the specified entity.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Moq;
+using Ploeh.AutoFixture.Xunit;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
@@ -30,10 +31,10 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void FindAll_DoesNotReturnNull(Mock<IUnitOfWork> unitOfWork, DbSetStub<object> dbSet)
+        public void FindAll_DoesNotReturnNull(Mock<IUnitOfWork> unitOfWork, object[] entities)
         {
             // Given
-            unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
+            unitOfWork.Setup(s => s.Get<object>()).Returns(entities);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
@@ -45,10 +46,10 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void FindAll_WithNoResults_ReturnsEmptySequence(Mock<IUnitOfWork> unitOfWork, DbSetStub<object> dbSet)
+        public void FindAll_WithNoResults_ReturnsEmptySequence(Mock<IUnitOfWork> unitOfWork)
         {
             // Given
-            unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
+            unitOfWork.Setup(s => s.Get<object>()).Returns(new object[0]);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
@@ -61,26 +62,23 @@ namespace Thoughtology.Expresso.Tests.Data
         [Theory]
         [AutoMoqData]
         public void FindAll_WithSomeItems_ReturnsSameNumberOfItems(
-        Mock<IUnitOfWork> unitOfWork,
-        DbSetStub<object> dbSet,
-        object[] entities)
+            Mock<IUnitOfWork> unitOfWork,
+            object[] entities)
         {
             // Given
-            dbSet.Entities = entities;
-            unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
+            unitOfWork.Setup(s => s.Get<object>()).Returns(entities);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
             var result = sut.FindAll();
 
             // Then
-            Assert.Equal(dbSet.Count(), result.Count());
+            Assert.Equal(entities.Count(), result.Count());
         }
 
         [Theory]
         [AutoMoqData]
-        public void Save_WithNullEntity_ThrowsArgumentNullException(
-        Mock<IUnitOfWork> unitOfWork)
+        public void Save_WithNullEntity_ThrowsArgumentNullException(Mock<IUnitOfWork> unitOfWork)
         {
             // Given
             var sut = new Repository<object>(unitOfWork.Object);
@@ -91,27 +89,45 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void Save_WithEntity_AddsEntityToUnitOfWork(
-        Mock<IUnitOfWork> unitOfWork,
-        DbSetStub<object> dbSet,
-        object entity)
+        public void Save_WithNewEntity_RegistersEntityAsAdded(
+            Mock<IUnitOfWork> unitOfWork,
+            object entity,
+            object[] entities)
         {
             // Given
-            unitOfWork.Setup(s => s.Get<object>()).Returns(dbSet);
+            unitOfWork.Setup(s => s.Get<object>()).Returns(entities);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
             sut.Save(entity);
 
             // Then
-            Assert.Contains(entity, dbSet);
+            unitOfWork.Verify(m => m.RegisterAdded(entity));
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Save_WithExistingEntity_RegistersEntityAsModified(
+            Mock<IUnitOfWork> unitOfWork,
+            [Frozen]object entity,
+            object[] entities)
+        {
+            // Given
+            unitOfWork.Setup(s => s.Get<object>()).Returns(entities);
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // When
+            sut.Save(entity);
+
+            // Then
+            unitOfWork.Verify(m => m.RegisterModified(entity));
         }
 
         [Theory]
         [AutoMoqData]
         public void Save_WithEntity_CommitsUnitOfWork(
-        Mock<IUnitOfWork> unitOfWork,
-        object entity)
+            Mock<IUnitOfWork> unitOfWork,
+            object entity)
         {
             // Given
             var sut = new Repository<object>(unitOfWork.Object);

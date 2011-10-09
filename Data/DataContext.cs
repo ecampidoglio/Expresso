@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using Thoughtology.Expresso.Model;
@@ -41,7 +42,7 @@ namespace Thoughtology.Expresso.Data
         {
             get
             {
-                return Get<Post>();
+                return Set<Post>();
             }
         }
 
@@ -50,30 +51,61 @@ namespace Thoughtology.Expresso.Data
         /// </summary>
         /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
         /// <returns>The set of entities.</returns>
-        public IDbSet<TEntity> Get<TEntity>()
-            where TEntity: class
+        public IEnumerable<TEntity> Get<TEntity>() where TEntity : class
         {
             return Set<TEntity>();
         }
 
         /// <summary>
-        /// Retrieves the <see cref="EntityState"/> of the specified entity.
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be added to the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
         /// </summary>
-        /// <typeparam name="TEntity">The type of the entity to retrieve the status for.</typeparam>
-        /// <param name="entity">The entity instance to retrieve the status for.</param>
-        /// <returns>
-        /// A member of the <see cref="EntityState"/> enumeration.
-        /// </returns>
+        /// <typeparam name="TEntity">The type of entity to add.</typeparam>
+        /// <param name="entity">The entity object to add.</param>
         /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
-        public EntityState GetState<TEntity>(TEntity entity)
-            where TEntity: class
+        public void RegisterAdded<TEntity>(TEntity entity) where TEntity : class
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
 
-            return Entry(entity).State;
+            Set<TEntity>().Add(entity);
+        }
+
+        /// <summary>
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be updated in the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of entity to update.</typeparam>
+        /// <param name="entity">The entity object to update.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        public void RegisterModified<TEntity>(TEntity entity) where TEntity : class
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            Set<TEntity>().Attach(entity);
+            Entry(entity).State = EntityState.Modified;
+        }
+
+        /// <summary>
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be deleted from the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of entity to delete.</typeparam>
+        /// <param name="entity">The entity object to delete.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        public void RegisterDeleted<TEntity>(TEntity entity) where TEntity : class
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            Set<TEntity>().Remove(entity);
         }
 
         /// <summary>

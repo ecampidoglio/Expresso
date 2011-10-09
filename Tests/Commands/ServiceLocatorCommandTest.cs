@@ -41,8 +41,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void GetServiceLocator_HasAllExpectedServices()
         {
             // Given
-            var expectedServices = new [] { typeof(IUnitOfWork),
-            typeof(IRepository<Post>) };
+            var expectedServices = new[] { typeof(IUnitOfWork), typeof(IRepository<Post>) };
             var sut = new ServiceLocatorCommand();
 
             // Then

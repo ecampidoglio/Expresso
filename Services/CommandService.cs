@@ -7,8 +7,8 @@ namespace Thoughtology.Expresso.Services
     /// Implements the command operations that can be performed on entities of the specified <typeparamref name="TEntity"/> type.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entities involved in the commands.</typeparam>
-    public class CommandService<TEntity> : Thoughtology.Expresso.Services.ICommandService<TEntity>
-        where TEntity: class
+    public class CommandService<TEntity> : ICommandService<TEntity>
+        where TEntity : class
     {
         private readonly IRepository<TEntity> repository;
 

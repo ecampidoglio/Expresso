@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Data;
-using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace Thoughtology.Expresso.Data
 {
@@ -14,19 +13,34 @@ namespace Thoughtology.Expresso.Data
         /// </summary>
         /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
         /// <returns>The set of entities.</returns>
-        IDbSet<TEntity> Get<TEntity>()
-            where TEntity: class;
+        IEnumerable<TEntity> Get<TEntity>() where TEntity : class;
 
         /// <summary>
-        /// Retrieves the <see cref="EntityState"/> of the specified entity.
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be added to the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
         /// </summary>
-        /// <typeparam name="TEntity">The type of the entity to retrieve the status for.</typeparam>
-        /// <param name="entity">The entity instance to retrieve the status for.</param>
-        /// <returns>
-        /// A member of the <see cref="EntityState"/> enumeration.
-        /// </returns>
-        EntityState GetState<TEntity>(TEntity entity)
-            where TEntity: class;
+        /// <typeparam name="TEntity">The type of entity to add.</typeparam>
+        /// <param name="entity">The entity object to add.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        void RegisterAdded<TEntity>(TEntity entity) where TEntity : class;
+
+        /// <summary>
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be updated in the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of entity to update.</typeparam>
+        /// <param name="entity">The entity object to update.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        void RegisterModified<TEntity>(TEntity entity) where TEntity : class;
+
+        /// <summary>
+        /// Schedules the specified <typeparamref name="TEntity"/> object to be deleted from the data store.
+        /// The operation will first take effect when the <see cref="M:Commit"/> method is called.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of entity to delete.</typeparam>
+        /// <param name="entity">The entity object to delete.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        void RegisterDeleted<TEntity>(TEntity entity) where TEntity : class;
 
         /// <summary>
         /// Performs any pending operations on the data store as a single unit.

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -26,6 +25,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
             // Then
             Assert.IsAssignableFrom<IUnitOfWork>(sut);
+            sut.Dispose();
         }
 
         [Theory]
@@ -45,7 +45,7 @@ namespace Thoughtology.Expresso.Tests.Data
         [AutoData]
         public void GetPosts_DoesNotReturnNull(string databaseName)
         {
-            //  Given
+            // Given
             var sut = new DataContext(databaseName);
 
             // When
@@ -75,13 +75,13 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPosts_WithNewItem_ReturnsCollectionWithOneElement([Frozen] Post post, [Frozen] string databaseName)
+        public void GetPosts_WithNewPost_ReturnsCollectionWithOneElement([Frozen] Post post, [Frozen] string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
 
             // When
-            sut.Get<Post>().Add(post);
+            sut.RegisterAdded(post);
             sut.SaveChanges();
             var result = sut.Get<Post>();
 
@@ -93,48 +93,105 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithNullItem_ThrowsArgumentNullException([Frozen] string databaseName)
+        public void RegisterAdded_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
 
             // Then
-            Assert.Throws<ArgumentNullException>(() => sut.GetState<Post>(null));
+            Assert.Throws<ArgumentNullException>(() => sut.RegisterAdded<Post>(null));
             sut.Database.Delete();
             sut.Dispose();
         }
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithDetachedItem_ReturnsDetachedState([Frozen] Post post, [Frozen] string databaseName)
+        public void RegisterAdded_WithNewPost_PersistsPost(
+            [Frozen] string databaseName,
+            Post post)
         {
             // Given
-            var expectedState = EntityState.Detached;
             var sut = new DataContext(databaseName);
 
             // When
-            EntityState result = sut.GetState<Post>(post);
+            sut.RegisterAdded(post);
+            sut.Commit();
+            var result = sut.Get<Post>().FirstOrDefault();
 
             // Then
-            Assert.Equal(expectedState, result);
+            Assert.Equal(post, result);
             sut.Database.Delete();
             sut.Dispose();
         }
 
         [Theory]
         [AutoData]
-        public void GetPostState_WithTransientItem_ReturnsDetachedState([Frozen] Post post, [Frozen] string databaseName)
+        public void RegisterModified_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
         {
             // Given
-            post.Id = 0;
-            var expectedState = EntityState.Detached;
             var sut = new DataContext(databaseName);
 
+            // Then
+            Assert.Throws<ArgumentNullException>(() => sut.RegisterModified<Post>(null));
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoData]
+        public void RegisterModified_WithModifiedPost_PersistsPost(
+            [Frozen] string databaseName,
+            Post post,
+            string modifiedValue)
+        {
+            // Given
+            var sut = new DataContext(databaseName);
+            sut.RegisterAdded(post);
+            sut.Commit();
+
             // When
-            EntityState result = sut.GetState<Post>(post);
+            post.Title = modifiedValue;
+            sut.RegisterModified(post);
+            sut.Commit();
+            var result = sut.Get<Post>().FirstOrDefault();
 
             // Then
-            Assert.Equal(expectedState, result);
+            Assert.Equal(post, result);
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoData]
+        public void RegisterDeleted_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
+        {
+            // Given
+            var sut = new DataContext(databaseName);
+
+            // Then
+            Assert.Throws<ArgumentNullException>(() => sut.RegisterDeleted<Post>(null));
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoData]
+        public void RegisterDeleted_WithPost_RemovesPost(
+            [Frozen] string databaseName,
+            Post post)
+        {
+            // Given
+            var sut = new DataContext(databaseName);
+            sut.RegisterAdded(post);
+            sut.Commit();
+
+            // When
+            sut.RegisterDeleted(post);
+            sut.Commit();
+            var result = sut.Get<Post>().Any();
+
+            // Then
+            Assert.False(result);
             sut.Database.Delete();
             sut.Dispose();
         }

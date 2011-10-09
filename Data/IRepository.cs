@@ -9,7 +9,7 @@ namespace Thoughtology.Expresso.Data
     /// </summary>
     /// <typeparam name="TEntity">The type of entity instances to access.</typeparam>
     public interface IRepository<TEntity>
-        where TEntity: class
+        where TEntity : class
     {
         /// <summary>
         /// Retrieves all instances of the specified <typeparamref name="TEntity"/> type matching the specified criteria.

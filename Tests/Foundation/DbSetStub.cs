@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Thoughtology.Expresso.Tests.Foundation
 {
     public class DbSetStub<TEntity> : IDbSet<TEntity>
-        where TEntity: class
+        where TEntity : class
     {
         public DbSetStub()
         {
@@ -62,7 +62,7 @@ namespace Thoughtology.Expresso.Tests.Foundation
         }
 
         public TDerivedEntity Create<TDerivedEntity>()
-            where TDerivedEntity: class, TEntity
+            where TDerivedEntity : class, TEntity
         {
             return Activator.CreateInstance<TDerivedEntity>();
         }

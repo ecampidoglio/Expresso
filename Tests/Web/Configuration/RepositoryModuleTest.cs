@@ -23,7 +23,7 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
         public void BuildContainer_ContainerHasAllExpectedServices()
         {
             // Given
-            var expectedServices = new [] { typeof(IUnitOfWork), typeof(IRepository<>) };
+            var expectedServices = new[] { typeof(IUnitOfWork), typeof(IRepository<>) };
             var builder = new ContainerBuilder();
             var sut = new RepositoryModule();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Thoughtology.Expresso.Data
@@ -10,7 +11,7 @@ namespace Thoughtology.Expresso.Data
     /// </summary>
     /// <typeparam name="TEntity">The type of entity instances to access.</typeparam>
     public class Repository<TEntity> : IRepository<TEntity>
-        where TEntity: class
+        where TEntity : class
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -23,11 +24,7 @@ namespace Thoughtology.Expresso.Data
         /// <exception cref="ArgumentNullException"><paramref name="unitOfWork"/> is null.</exception>
         public Repository(IUnitOfWork unitOfWork)
         {
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfWork");
-            }
-
+            VerifyUnitOfWorkIsNotNull(unitOfWork);
             this.unitOfWork = unitOfWork;
         }
 
@@ -44,7 +41,9 @@ namespace Thoughtology.Expresso.Data
         /// or an empty sequence when none matched the criteria.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="criteria"/> is null.</exception>
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> criteria, params string[] includedPropertyPaths)
+        public IEnumerable<TEntity> Find(
+            Expression<Func<TEntity, bool>> criteria,
+            params string[] includedPropertyPaths)
         {
             throw new NotImplementedException();
         }
@@ -72,13 +71,42 @@ namespace Thoughtology.Expresso.Data
         /// <exception cref="ArgumentNullException"><paramref name="instance"/> is null.</exception>
         public void Save(TEntity instance)
         {
+            VerifyEntityIsNotNull(instance);
+            RegisterEntityAsAddedOrModified(instance);
+            unitOfWork.Commit();
+        }
+
+        private void VerifyUnitOfWorkIsNotNull(IUnitOfWork unitOfWork)
+        {
+            if (unitOfWork == null)
+            {
+                throw new ArgumentNullException("unitOfWork");
+            }
+        }
+
+        private void VerifyEntityIsNotNull(TEntity instance)
+        {
             if (instance == null)
             {
                 throw new ArgumentNullException("instance");
             }
+        }
 
-            unitOfWork.Get<TEntity>().Add(instance);
-            unitOfWork.Commit();
+        private void RegisterEntityAsAddedOrModified(TEntity instance)
+        {
+            if (IsPersistedEntity(instance))
+            {
+                unitOfWork.RegisterModified(instance);
+            }
+            else
+            {
+                unitOfWork.RegisterAdded(instance);
+            }
+        }
+
+        private bool IsPersistedEntity(TEntity instance)
+        {
+            return unitOfWork.Get<TEntity>().Contains(instance);
         }
     }
 }
