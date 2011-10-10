@@ -14,7 +14,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void CreateFromException_WithNullException_ThrowsArgumentNullException()
         {
             // When, Then
-            Assert.Throws<ArgumentNullException>(() => ErrorRecordFactory.CreateFromException(null));
+            Assert.Throws<ArgumentNullException>(() => Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(null));
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void CreateFromException_WithException_DoesNotReturnNull(Exception exception)
         {
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception);
 
             // Then
             Assert.NotNull(result);
@@ -33,7 +33,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void CreateFromException_WithException_ReturnsErrorRecordWithSameException(Exception exception)
         {
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception);
 
             // Then
             Assert.Same(exception, result.Exception);
@@ -47,7 +47,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             var expectedErrorId = exception.GetType().FullName;
 
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception);
 
             // Then
             Assert.Equal(expectedErrorId, result.FullyQualifiedErrorId);
@@ -61,7 +61,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             var expectedErrorCategory = ErrorCategory.NotSpecified;
 
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception);
 
             // Then
             Assert.Equal(expectedErrorCategory, result.CategoryInfo.Category);
@@ -76,7 +76,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         Exception exception)
         {
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception, errorCategory);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception, errorCategory);
 
             // Then
             Assert.Equal(errorCategory, result.CategoryInfo.Category);
@@ -89,7 +89,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         object target)
         {
             // When
-            var result = ErrorRecordFactory.CreateFromException(exception, targetObject: target);
+            var result = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception, targetObject: target);
 
             // Then
             Assert.Same(target, result.TargetObject);

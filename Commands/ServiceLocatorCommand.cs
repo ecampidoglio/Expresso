@@ -120,12 +120,12 @@ namespace Thoughtology.Expresso.Commands
 
         private void CreateErrorRecordFromException(Exception exception)
         {
-            errorRecord = ErrorRecordFactory.CreateFromException(exception);
+            errorRecord = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception);
         }
 
         private void CreateErrorRecordFromInnerException(Exception exception)
         {
-            errorRecord = ErrorRecordFactory.CreateFromException(exception.InnerException, ErrorCategory.InvalidOperation);
+            errorRecord = Thoughtology.Expresso.Commands.Runtime.ErrorRecordFactory.CreateFromException(exception.InnerException, ErrorCategory.InvalidOperation);
         }
     }
 }

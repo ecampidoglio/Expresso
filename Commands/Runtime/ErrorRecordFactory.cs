@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Management.Automation;
 
-namespace Thoughtology.Expresso.Commands
+namespace Thoughtology.Expresso.Commands.Runtime
 {
     /// <summary>
     /// Exposes static factory methods to easily create instances of the <see cref="ErrorRecord"/> class. 

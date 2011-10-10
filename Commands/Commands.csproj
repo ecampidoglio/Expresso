@@ -59,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorRecordFactory.cs" />
+    <Compile Include="Runtime\ErrorRecordFactory.cs" />
     <Compile Include="GetPostCommand.cs" />
     <Compile Include="NewPostCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
