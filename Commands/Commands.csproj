@@ -63,6 +63,7 @@
     <Compile Include="GetPostCommand.cs" />
     <Compile Include="NewPostCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\PSCmdletExtension.cs" />
     <Compile Include="ServiceLocatorCommand.cs" />
     <Compile Include="SetPostCommand.cs" />
   </ItemGroup>

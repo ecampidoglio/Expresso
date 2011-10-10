@@ -80,6 +80,11 @@ namespace Thoughtology.Expresso.Commands
         private void InitializeContainerBuilder()
         {
             builder = new ContainerBuilder();
+            RegisterComponents();
+        }
+
+        private void RegisterComponents()
+        {
             RegisterUnitOfWork();
             RegisterRepositories();
         }
