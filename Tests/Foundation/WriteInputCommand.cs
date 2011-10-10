@@ -2,8 +2,8 @@
 
 namespace Thoughtology.Expresso.Tests.Foundation
 {
-    [Cmdlet(VerbsCommunications.Write, "PassThrough")]
-    public class WritePassThroughCommand : PSCmdlet
+    [Cmdlet(VerbsCommunications.Write, "Input")]
+    public class WriteInputCommand : PSCmdlet
     {
         [Parameter(
             ValueFromPipeline = true,

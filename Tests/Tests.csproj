@@ -97,7 +97,7 @@
     <Compile Include="Data\RepositoryTest.cs" />
     <Compile Include="Foundation\AutoMoqDataAttribute.cs" />
     <Compile Include="Foundation\DbSetStub.cs" />
-    <Compile Include="Foundation\WritePassThroughCommand.cs" />
+    <Compile Include="Foundation\WriteInputCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommandServiceTest.cs" />
     <Compile Include="Services\QueryServiceTest.cs" />

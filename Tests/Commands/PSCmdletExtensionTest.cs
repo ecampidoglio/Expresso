@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
@@ -12,7 +13,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void InvokeInRunspace_WithNoParameters_DoesNotReturnNull()
         {
             // Given
-            var sut = new WritePassThroughCommand();
+            var sut = new WriteInputCommand();
 
             // When
             var result = sut.InvokeInRunspace();
@@ -28,7 +29,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void InvokeInRunspace_WithParameter_ReturnsParameterValue(object parameterValue)
         {
             // Given
-            var cmdlet = new WritePassThroughCommand { InputObject = parameterValue };
+            var cmdlet = new WriteInputCommand { InputObject = parameterValue };
 
             // When
             var result = PSCmdletExtension.InvokeInRunspace(cmdlet)
@@ -39,6 +40,13 @@ namespace Thoughtology.Expresso.Tests.Commands
             Assert.Equal(parameterValue, result);
         }
 
+        [Fact]
+        public void InvokeInRunspace_WithNull_ThrowsArgumentNullException()
+        {
+            // Given, Then
+            Assert.Throws<ArgumentNullException>(() => PSCmdletExtension.InvokeInRunspace(null));
+        }
+
         [Theory]
         [InlineData("String")]
         [InlineData(default(int))]
@@ -46,7 +54,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         public void InvokeInRunspace_WithTypeParameter_ReturnsParameterValue(object parameterValue)
         {
             // Given
-            var cmdlet = new WritePassThroughCommand { InputObject = parameterValue };
+            var cmdlet = new WriteInputCommand { InputObject = parameterValue };
 
             // When
             var result = PSCmdletExtension.InvokeInRunspace<object>(cmdlet)
@@ -54,6 +62,13 @@ namespace Thoughtology.Expresso.Tests.Commands
 
             // Then
             Assert.Equal(parameterValue, result);
+        }
+
+        [Fact]
+        public void InvokeInRunspace_WithTypeParameterAndNull_ThrowsArgumentNullException()
+        {
+            // Given, Then
+            Assert.Throws<ArgumentNullException>(() => PSCmdletExtension.InvokeInRunspace<object>(null));
         }
     }
 }
