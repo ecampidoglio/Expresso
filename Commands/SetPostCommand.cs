@@ -48,6 +48,12 @@ namespace Thoughtology.Expresso.Commands
         public string Content { get; set; }
 
         /// <summary>
+        /// Gets or sets the tags of the post.
+        /// </summary>
+        [Parameter(Position = 2)]
+        public string[] Tags { get; set; }
+
+        /// <summary>
         /// Processes each input object from the pipeline.
         /// </summary>
         protected override void ProcessRecord()
@@ -111,6 +117,7 @@ namespace Thoughtology.Expresso.Commands
         {
             SetTitleFromParameter();
             SetContentFromParameter();
+            SetTagsFromParameter();
         }
 
         private void SetTitleFromParameter()
@@ -126,6 +133,17 @@ namespace Thoughtology.Expresso.Commands
             if (Content != null)
             {
                 activePost.MarkdownContent = Content;
+            }
+        }
+
+        private void SetTagsFromParameter()
+        {
+            if (Tags != null)
+            {
+                foreach (var tag in Tags)
+                {
+                    activePost.Tags.Add(new Tag { Name = tag });
+                }
             }
         }
 

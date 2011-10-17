@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Thoughtology.Expresso.Model
@@ -14,6 +15,7 @@ namespace Thoughtology.Expresso.Model
         public Post()
         {
             this.ModifiedTimestamp = DateTime.Now;
+            this.Tags = new List<Tag>();
         }
 
         /// <summary>
@@ -46,5 +48,10 @@ namespace Thoughtology.Expresso.Model
         /// and is not visible on the web site.
         /// </remarks>
         public DateTime? PublishedTimestamp { get; set; }
+
+        /// <summary>
+        /// Gets the collection of tags associated to this post.
+        /// </summary>
+        public ICollection<Tag> Tags { get; private set; }
     }
 }

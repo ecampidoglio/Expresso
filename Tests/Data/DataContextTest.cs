@@ -2,9 +2,9 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Ploeh.AutoFixture.Xunit;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
+using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -29,7 +29,7 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void Constructor_DoesNotThrow(string databaseName)
         {
             // When
@@ -42,7 +42,7 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void GetPosts_DoesNotReturnNull(string databaseName)
         {
             // Given
@@ -58,7 +58,7 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void GetPosts_ReturnsEmptyCollection(string databaseName)
         {
             // Given
@@ -74,8 +74,10 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
-        public void GetPosts_WithNewPost_ReturnsCollectionWithOneElement([Frozen] Post post, [Frozen] string databaseName)
+        [AutoMoqData]
+        public void GetPosts_WithNewPost_ReturnsCollectionWithOneElement(
+            Post post,
+            string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -92,8 +94,30 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
-        public void RegisterAdded_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
+        [AutoMoqData]
+        public void GetPosts_WithNewPostAndTag_ReturnsPostWithTheSameTag(
+            Post post,
+            Tag tag,
+            string databaseName)
+        {
+            // Given
+            post.Tags.Add(tag);
+            var sut = new DataContext(databaseName);
+
+            // When
+            sut.RegisterAdded(post);
+            sut.SaveChanges();
+            var result = sut.Get<Post>().SingleOrDefault();
+
+            // Then
+            Assert.True(post.Tags.SequenceEqual(result.Tags));
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void RegisterAdded_WithNullPost_ThrowsArgumentNullException(string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -105,9 +129,9 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void RegisterAdded_WithNewPost_PersistsPost(
-            [Frozen] string databaseName,
+            string databaseName,
             Post post)
         {
             // Given
@@ -125,8 +149,8 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
-        public void RegisterModified_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
+        [AutoMoqData]
+        public void RegisterModified_WithNullPost_ThrowsArgumentNullException(string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -138,9 +162,9 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void RegisterModified_WithModifiedPost_PersistsPost(
-            [Frozen] string databaseName,
+            string databaseName,
             Post post,
             string modifiedValue)
         {
@@ -162,8 +186,8 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
-        public void RegisterDeleted_WithNullPost_ThrowsArgumentNullException([Frozen] string databaseName)
+        [AutoMoqData]
+        public void RegisterDeleted_WithNullPost_ThrowsArgumentNullException(string databaseName)
         {
             // Given
             var sut = new DataContext(databaseName);
@@ -175,9 +199,9 @@ namespace Thoughtology.Expresso.Tests.Data
         }
 
         [Theory]
-        [AutoData]
+        [AutoMoqData]
         public void RegisterDeleted_WithPost_RemovesPost(
-            [Frozen] string databaseName,
+            string databaseName,
             Post post)
         {
             // Given

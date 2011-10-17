@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+    <Type>
+        <Name>Thoughtology.Expresso.Model.Post</Name>
+        <Members>
+            <AliasProperty>
+                <Name>Content</Name>
+                <ReferencedMemberName>MarkdownContent</ReferencedMemberName>
+            </AliasProperty>
+            <ScriptProperty>
+                <Name>Tagged</Name>
+                <GetScriptBlock>
+                    $separator = ','
+                    foreach ($tag in $this.Tags) {
+                        $value += "{0}{1}" -f $tag.Name, $separator
+                    }
+                    $value.TrimEnd($separator)
+                </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+</Types>
