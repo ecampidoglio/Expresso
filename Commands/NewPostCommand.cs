@@ -19,18 +19,26 @@ namespace Thoughtology.Expresso.Commands
         /// Gets or sets the title of the post.
         /// </summary>
         [Parameter(
-        Position = 0,
-        Mandatory = true,
-        ValueFromPipelineByPropertyName = true)]
+            Position = 0,
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true)]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the content of the post.
         /// </summary>
         [Parameter(
-        Position = 1,
-        ValueFromPipelineByPropertyName = true)]
+            Position = 1,
+            ValueFromPipelineByPropertyName = true)]
         public string Content { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tags of the post.
+        /// </summary>
+        [Parameter(
+            Position = 2,
+            ValueFromPipelineByPropertyName = true)]
+        public string[] Tags { get; set; }
 
         /// <summary>
         /// Processes each input object from the pipeline.
@@ -66,6 +74,18 @@ namespace Thoughtology.Expresso.Commands
         private void CreateNewPostFromParameters()
         {
             newPost = new Post { Title = Title, MarkdownContent = Content };
+            AddTagsFromParameters();
+        }
+
+        private void AddTagsFromParameters()
+        {
+            if (Tags != null)
+            {
+                foreach (var tag in Tags)
+                {
+                    newPost.Tags.Add(new Tag { Name = tag });
+                }
+            }
         }
 
         private void SaveNewPost()

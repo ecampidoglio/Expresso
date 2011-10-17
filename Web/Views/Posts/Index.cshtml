@@ -1,10 +1,19 @@
 ﻿@{
     ViewBag.Title = "Posts";
 }
-<h2>Posts</h2>
 
 @foreach (var post in ViewBag.Posts)
 {
-    <h3>@post.Title</h3>
+    <h1>@post.Title</h1>
+    
+    <h3>Posted @post.ModifiedTimestamp.ToString("d")</h3>
+    
     <p>@post.MarkdownContent</p>
+    
+    <ul class="tags">
+        @foreach (var tag in post.Tags)
+        {
+            <li>@tag.Name</li>
+        }
+    </ul>
 }

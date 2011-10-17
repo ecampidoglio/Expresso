@@ -5,9 +5,9 @@
 }
 body
 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #c17514;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    color: #804E0D;
     background: url(themes/moka/images/siteBackground.jpg) repeat-x left top;
 }
 .horsep
@@ -19,7 +19,14 @@ body
 h1
 {
     font-size: 18px;
-    color: #0082bf;
+    color: #512404;
+    margin: 20px 0 0 0;
+}
+h3
+{
+    font-size: 12px;
+    color: #994508;
+    margin: 5px 0 5px 0;
 }
 a
 {
@@ -39,7 +46,7 @@ a:hover
 }
 #header
 {
-    height: 329px;
+    height: 260px;
     background: url(themes/moka/images/headerTopBackground.jpg) no-repeat left top;
 }
 .logo
@@ -76,10 +83,11 @@ a:hover
 }
 #sidebar1 li
 {
+    font-size: 85%;
     list-style: none;
-    margin: 10px 0;
-    background: url(themes/moka/images/p.jpg) no-repeat left top;
-    padding-left: 20px;
+    margin: 10px 10px;
+    list-style-image: url(themes/moka/images/comment.png);
+    padding: -1px;
 }
 #sidebar1 li span
 {
@@ -89,6 +97,22 @@ a:hover
 #mainContent
 {
     margin: 0 283px 0 20px; /* the right margin on this div element creates the column down the right side of the page - no matter how much content the sidebar1 div contains, the column space will remain. You can remove this margin if you want the #mainContent div's text to fill the #sidebar1 space when the content in #sidebar1 ends. */
+}
+.tags
+{
+    margin: 5px 0px 0px 0px;
+}
+.tags li
+{
+    list-style: none;
+    display: inline;
+    font-size: 75%;
+    color: #FFFFFF;
+    background-color: #994508;
+    border-right: 1px solid #331702;
+    border-bottom: 1px solid #331702;
+    padding: 2px 5px 2px 5px;
+    margin: 0px 2px 0px 0px;
 }
 .textBox
 {

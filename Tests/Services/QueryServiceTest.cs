@@ -62,7 +62,7 @@ namespace Thoughtology.Expresso.Tests.Services
         public void Find_WithSomeItems_ReturnsSameNumberOfResults(Mock<IRepository> repository, object[] items)
         {
             // Given
-            repository.Setup(s => s.FindAll()).Returns(items);
+            repository.Setup(s => s.Find(It.IsAny<string[]>())).Returns(items);
             var sut = new QueryService<object>(repository.Object);
 
             // When
@@ -70,6 +70,20 @@ namespace Thoughtology.Expresso.Tests.Services
 
             // Then
             Assert.Equal(items.Count(), result.Count());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Find_EagerLoadsAssociatedTags(Mock<IRepository> repository, object[] items)
+        {
+            // Given
+            var sut = new QueryService<object>(repository.Object);
+
+            // When
+            var result = sut.Find();
+
+            // Then
+            repository.Verify(m => m.Find("Tags"));
         }
     }
 }

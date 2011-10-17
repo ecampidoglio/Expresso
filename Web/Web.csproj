@@ -125,6 +125,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Content\themes\moka\images\bodyTitle.jpg" />
+    <Content Include="Content\themes\moka\images\comment.png" />
     <Content Include="Content\themes\moka\images\Espresso.png" />
     <Content Include="Content\themes\moka\images\headerTopBackground.jpg" />
     <Content Include="Content\themes\moka\images\horSeparator.gif" />
@@ -132,6 +133,7 @@
     <Content Include="Content\themes\moka\images\see_more.jpg" />
     <Content Include="Content\themes\moka\images\sidebarTitle.jpg" />
     <Content Include="Content\themes\moka\images\siteBackground.jpg" />
+    <Content Include="Content\themes\moka\images\Twitter.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />

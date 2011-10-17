@@ -36,7 +36,7 @@ namespace Thoughtology.Expresso.Services
         /// </returns>
         public IEnumerable<TEntity> Find()
         {
-            return repository.FindAll();
+            return repository.Find("Tags");
         }
     }
 }

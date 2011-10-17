@@ -16,6 +16,7 @@ namespace Thoughtology.Expresso.Commands.Runtime
         private static IServiceLocator serviceLocator;
         private static IContainer container;
         private static ContainerBuilder builder;
+        private static Configuration configuration;
 
         /// <summary>
         /// Gets the singleton <see cref="IServiceLocator"/>.
@@ -89,14 +90,20 @@ namespace Thoughtology.Expresso.Commands.Runtime
 
         private static string GetConnectionStringFromConfigurationFile()
         {
-            var config = ReadConfigurationFromFile();
-            return config.ConnectionStrings.ConnectionStrings["Expresso"].ConnectionString;
+            configuration = ReadConfigurationFromFile();
+            return GetConnectionStringFromConfiguration();
         }
 
         private static Configuration ReadConfigurationFromFile()
         {
             var assemblyLocation = Assembly.GetExecutingAssembly().Location;
             return ConfigurationManager.OpenExeConfiguration(assemblyLocation);
+        }
+
+        private static string GetConnectionStringFromConfiguration()
+        {
+            var setting = configuration.ConnectionStrings.ConnectionStrings["Expresso"];
+            return (setting != null) ? setting.ConnectionString : null;
         }
 
         private static void RegisterRepositories()

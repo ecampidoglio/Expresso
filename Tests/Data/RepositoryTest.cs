@@ -31,14 +31,14 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void FindAll_DoesNotReturnNull(Mock<IUnitOfWork> unitOfWork, object[] entities)
+        public void Find_DoesNotReturnNull(Mock<IUnitOfWork> unitOfWork, object[] entities)
         {
             // Given
             unitOfWork.Setup(s => s.Get<object>()).Returns(entities);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
-            var result = sut.FindAll();
+            var result = sut.Find();
 
             // Then
             Assert.NotNull(result);
@@ -46,14 +46,14 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void FindAll_WithNoResults_ReturnsEmptySequence(Mock<IUnitOfWork> unitOfWork)
+        public void Find_WithNoResults_ReturnsEmptySequence(Mock<IUnitOfWork> unitOfWork)
         {
             // Given
             unitOfWork.Setup(s => s.Get<object>()).Returns(new object[0]);
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
-            var result = sut.FindAll();
+            var result = sut.Find();
 
             // Then
             Assert.False(result.Any());
@@ -61,7 +61,7 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
-        public void FindAll_WithSomeItems_ReturnsSameNumberOfItems(
+        public void Find_WithSomeItems_ReturnsSameNumberOfItems(
             Mock<IUnitOfWork> unitOfWork,
             object[] entities)
         {
@@ -70,10 +70,37 @@ namespace Thoughtology.Expresso.Tests.Data
             var sut = new Repository<object>(unitOfWork.Object);
 
             // When
-            var result = sut.FindAll();
+            var result = sut.Find();
 
             // Then
             Assert.Equal(entities.Count(), result.Count());
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Find_WithEagerLoadedPropertyPaths_InvokesUnitOfWorkWithSamePath(
+            Mock<IUnitOfWork> unitOfWork,
+            string[] propertyPaths)
+        {
+            // Given
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // When
+            sut.Find(propertyPaths);
+
+            // Then
+            unitOfWork.Verify(m => m.Get<object>(propertyPaths));
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void Find_WithCriteria_ThrowsNotImplementedException(Mock<IUnitOfWork> unitOfWork)
+        {
+            // Given
+            var sut = new Repository<object>(unitOfWork.Object);
+
+            // Then
+            Assert.Throws<NotImplementedException>(() => sut.Find(i => true));
         }
 
         [Theory]

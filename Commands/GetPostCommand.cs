@@ -35,7 +35,7 @@ namespace Thoughtology.Expresso.Commands
         private void FindAllPosts()
         {
             InitializeRepository();
-            posts = repository.FindAll();
+            posts = repository.Find("Tags");
         }
 
         private void InitializeRepository()

@@ -29,6 +29,22 @@ namespace Thoughtology.Expresso.Data
         }
 
         /// <summary>
+        /// Retrieves all instances of the entity type.
+        /// </summary>
+        /// <param name="includedPropertyPaths">
+        /// The list of properties on the specified <typeparamref name="TEntity"/> type to include in the results.
+        /// It is possible to specify properties on related objects using the <strong>Dot notation</strong>.
+        /// </param>
+        /// <returns>
+        /// A sequence of instances of <typeparamref name="TEntity"/>
+        /// or an empty sequence when none were found.
+        /// </returns>
+        public IEnumerable<TEntity> Find(params string[] includedPropertyPaths)
+        {
+            return unitOfWork.Get<TEntity>(includedPropertyPaths);
+        }
+
+        /// <summary>
         /// Retrieves all instances of the specified <typeparamref name="TEntity"/> type matching the specified criteria.
         /// </summary>
         /// <param name="criteria">The criteria used to filter the results.</param>
@@ -46,22 +62,6 @@ namespace Thoughtology.Expresso.Data
             params string[] includedPropertyPaths)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Retrieves all instances of the entity type.
-        /// </summary>
-        /// <param name="includedPropertyPaths">
-        /// The list of properties on the specified <typeparamref name="TEntity"/> type to include in the results.
-        /// It is possible to specify properties on related objects using the <strong>Dot notation</strong>.
-        /// </param>
-        /// <returns>
-        /// A sequence of instances of <typeparamref name="TEntity"/>
-        /// or an empty sequence when none were found.
-        /// </returns>
-        public IEnumerable<TEntity> FindAll(params string[] includedPropertyPaths)
-        {
-            return unitOfWork.Get<TEntity>();
         }
 
         /// <summary>

@@ -12,8 +12,13 @@ namespace Thoughtology.Expresso.Data
         /// Retrieves the collection of entities of the specified <typeparamref name="TEntity"/> type from the data store.
         /// </summary>
         /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
+        /// <param name="includedPropertyPaths">
+        /// The list of properties on the specified <typeparamref name="TEntity"/> type to include in the results.
+        /// It is possible to specify properties on related objects using the <strong>Dot notation</strong>.
+        /// </param>
         /// <returns>The set of entities.</returns>
-        IEnumerable<TEntity> Get<TEntity>() where TEntity : class;
+        IEnumerable<TEntity> Get<TEntity>(params string[] includedPropertyPaths)
+            where TEntity : class;
 
         /// <summary>
         /// Schedules the specified <typeparamref name="TEntity"/> object to be added to the data store.

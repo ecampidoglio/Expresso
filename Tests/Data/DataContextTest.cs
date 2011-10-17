@@ -117,6 +117,48 @@ namespace Thoughtology.Expresso.Tests.Data
 
         [Theory]
         [AutoMoqData]
+        public void GetPosts_WithNewPostAndEagerLoadedTag_ReturnsPostWithTheSameTag(
+            Post post,
+            Tag tag,
+            string databaseName)
+        {
+            // Given
+            post.Tags.Add(tag);
+            var sut = new DataContext(databaseName);
+
+            // When
+            sut.RegisterAdded(post);
+            sut.SaveChanges();
+            var result = sut.Get<Post>("Tags").SingleOrDefault();
+
+            // Then
+            Assert.True(post.Tags.SequenceEqual(result.Tags));
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoMoqData]
+        public void GetPosts_WithNewPostAndNonExistentEagerLoadedProperty_Throws(
+            Post post,
+            string propertyName,
+            string databaseName)
+        {
+            // Given
+            var sut = new DataContext(databaseName);
+
+            // When
+            sut.RegisterAdded(post);
+            sut.SaveChanges();
+
+            // Then
+            Assert.Throws<InvalidOperationException>(() => sut.Get<Post>(propertyName).Any());
+            sut.Database.Delete();
+            sut.Dispose();
+        }
+
+        [Theory]
+        [AutoMoqData]
         public void RegisterAdded_WithNullPost_ThrowsArgumentNullException(string databaseName)
         {
             // Given

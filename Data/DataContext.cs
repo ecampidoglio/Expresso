@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using Thoughtology.Expresso.Model;
 
 namespace Thoughtology.Expresso.Data
@@ -36,24 +37,40 @@ namespace Thoughtology.Expresso.Data
         }
 
         /// <summary>
-        /// Gets the collection of <see cref="Posts"/> entities in the data store.
+        /// Gets the collection of <see cref="Post"/> entities in the data store.
         /// </summary>
         public IDbSet<Post> Posts
         {
-            get
-            {
-                return Set<Post>();
-            }
+            get { return Set<Post>(); }
+        }
+
+        /// <summary>
+        /// Gets the collection of <see cref="Tag"/> entities in the data store.
+        /// </summary>
+        public IDbSet<Tag> Tags
+        {
+            get { return Set<Tag>(); }
         }
 
         /// <summary>
         /// Retrieves the collection of entities of the specified <typeparamref name="TEntity"/> type from the data store.
         /// </summary>
         /// <typeparam name="TEntity">The type of entities to retrieve.</typeparam>
+        /// <param name="includedPropertyPaths">
+        /// The list of properties on the specified <typeparamref name="TEntity"/> type to include in the results.
+        /// It is possible to specify properties on related objects using the <strong>Dot notation</strong>.
+        /// </param>
         /// <returns>The set of entities.</returns>
-        public IEnumerable<TEntity> Get<TEntity>() where TEntity : class
+        public IEnumerable<TEntity> Get<TEntity>(params string[] includedPropertyPaths) where TEntity : class
         {
-            return Set<TEntity>();
+            DbQuery<TEntity> query = CreateBaseQuery<TEntity>();
+
+            foreach (var path in includedPropertyPaths)
+            {
+                query = query.Include(path);
+            }
+
+            return query;
         }
 
         /// <summary>
@@ -114,6 +131,12 @@ namespace Thoughtology.Expresso.Data
         public void Commit()
         {
             SaveChanges();
+        }
+
+        private DbSet<TEntity> CreateBaseQuery<TEntity>()
+            where TEntity : class
+        {
+            return Set<TEntity>();
         }
     }
 }

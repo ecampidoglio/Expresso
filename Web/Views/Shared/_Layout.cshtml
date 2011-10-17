@@ -12,57 +12,47 @@
                 <p>Expresso</p>
             </div>
             <div class="author">
-                <p>
-                    Great coffee blends at express speed</p>
+                <p>A lightweight Markdown-based sample blog engine.</p>
             </div>
             <div id="navcontainer">
                 <ul id="navlist">
                     <li id="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Products", "Coffee", "Products")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.Partial("_LogOnPartial")</li>
                 </ul>
             </div>
         </div>
         <div id="sidebar1">
+            <img src="@Url.Content("~/Content/themes/moka/images/Twitter.png")" alt="Twitter" />
             <div class="sidT">
                 <div class="tt">
-                    <p>Twitter</p>
+                    <p>Latest comments</p>
                 </div>
             </div>
             <ul>
-            </ul>
-            <br />
-            <div class="sidT">
-                <div class="tt">
-                    <p>News</p>
-                </div>
-            </div>
-            <ul>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
-                <li><span>Quisque id enim tincidunt libero tempus aliquet.</span><br />
-                    Sed a tortor in erat fermentum dapibus. Vestibulum at mi arcu, quis varius enim.
-                    Proin neque metus, ullamcorper vitae pharetra nec, laoreet ut arcu. Pellentesque
-                    et libero vitae ligula </li>
+                <li>
+                <span>Barnaby said</span><br />
+                There's a voice that keeps on calling me. Down the road, that's where I'll always be.
+                Every stop I make, I make a new friend. Can't stay for long, just turn around and I'm gone again.
+                Maybe tomorrow, I'll want to settle down, Until tomorrow, I'll just keep moving on.<br />
+                <span>1 day ago</span>
+                </li>
+                <li>
+                <span>Murdock said</span><br />
+                Ten years ago a crack commando unit was sent to prison by a military court for a crime they didn't commit.
+                These men promptly escaped from a maximum security stockade to the Los Angeles underground.
+                Today, still wanted by the government, they survive as soldiers of fortune.
+                If you have a problem and no one else can help, and if you can find them, maybe you can hire the A-team.<br />
+                <span>3 days ago</span>
+                </li>
+                <li>
+                <span>Emmet Brown said</span><br />
+                I never spend much time in school but I taught ladies plenty.
+                It's true I hire my body out for pay, hey hey. I've gotten burned over Cheryl Tiegs, blown up for Raquel Welch.
+                But when I end up in the hay it's only hay, hey hey. I might jump an open drawbridge, or Tarzan from a vine.
+                'Cause I'm the unknown stuntman that makes Eastwood look so fine.<br />
+                <span>5 days ago</span>
+                </li>
             </ul>
         </div>
         <div id="mainContent">
