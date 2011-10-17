@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management.Automation;
+using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
 
@@ -10,7 +11,7 @@ namespace Thoughtology.Expresso.Commands
     /// A PowerShell cmdlet that retrieves <see cref="Post"/> objects from the data store.
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "Post")]
-    public class GetPostCommand : ServiceLocatorCommand
+    public class GetPostCommand : Command
     {
         private IRepository<Post> repository;
         private IEnumerable<Post> posts;
@@ -39,7 +40,7 @@ namespace Thoughtology.Expresso.Commands
 
         private void InitializeRepository()
         {
-            repository = ServiceLocator.GetInstance<IRepository<Post>>();
+            repository = ServiceLocator.Current.GetInstance<IRepository<Post>>();
         }
 
         private void SendPostsToPipeline()

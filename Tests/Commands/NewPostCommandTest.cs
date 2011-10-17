@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Management.Automation;
-using Microsoft.Practices.ServiceLocation;
 using Moq;
 using Thoughtology.Expresso.Commands;
+using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
 using Xunit.Extensions;
+using Common = Microsoft.Practices.ServiceLocation;
 
 namespace Thoughtology.Expresso.Tests.Commands
 {
@@ -54,14 +55,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_DelegatesToRepository(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = title;
@@ -74,13 +75,13 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNullTitle_ThrowsArgumentException(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = null;
@@ -92,7 +93,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithContent_DelegatesToRepository(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title,
         string content)
@@ -100,7 +101,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = title;
@@ -114,14 +115,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_ReturnsSinglePost(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = title;
@@ -134,14 +135,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithTitle_ReturnsSinglePostWithSameTitle(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = title;
@@ -154,7 +155,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithContent_ReturnsSinglePostWithSameContent(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title,
         string content)
@@ -162,7 +163,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Title = title;
@@ -176,7 +177,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         InvalidOperationException exception,
         string title)
@@ -185,7 +186,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Save(It.IsAny<Post>())).Throws(exception);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
             sut.Title = title;
 
             // Then
@@ -195,7 +196,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string title,
         string message,
@@ -206,7 +207,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Save(It.IsAny<Post>())).Throws(exception);
             var sut = new NewPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
             sut.Title = title;
 
             // Then

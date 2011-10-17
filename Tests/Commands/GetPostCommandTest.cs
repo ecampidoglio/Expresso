@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Management.Automation;
-using Microsoft.Practices.ServiceLocation;
 using Moq;
 using Thoughtology.Expresso.Commands;
+using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
 using Xunit.Extensions;
+using Common = Microsoft.Practices.ServiceLocation;
 
 namespace Thoughtology.Expresso.Tests.Commands
 {
@@ -54,13 +55,13 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNoPosts_ReturnsEmptySequenceOfPost(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new GetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             var result = sut.Invoke<Post>();
@@ -72,7 +73,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithSomePosts_ReturnsSameNumberOfPosts(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         Post[] posts)
         {
@@ -80,7 +81,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.FindAll()).Returns(posts);
             var sut = new GetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             var result = sut.Invoke<Post>();
@@ -92,7 +93,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         InvalidOperationException exception)
         {
@@ -100,7 +101,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.FindAll()).Throws(exception);
             var sut = new GetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // Then
             Assert.Throws(exception.GetType(), () => sut.Invoke<Post>().Any());
@@ -109,7 +110,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-        Mock<IServiceLocator> serviceLocator,
+        Mock<Common.IServiceLocator> serviceLocator,
         Mock<IRepository<Post>> repository,
         string message,
         InvalidOperationException innerException)
@@ -119,7 +120,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.FindAll()).Throws(exception);
             var sut = new GetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // Then
             Assert.Throws(innerException.GetType(), () => sut.Invoke<Post>().Any());

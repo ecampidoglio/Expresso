@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management.Automation;
+using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
 
@@ -9,7 +10,7 @@ namespace Thoughtology.Expresso.Commands
     /// A PowerShell cmdlet that creates a new <see cref="Post"/> object in the data store.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "Post")]
-    public class NewPostCommand : ServiceLocatorCommand
+    public class NewPostCommand : Command
     {
         private IRepository<Post> repository;
         private Post newPost;
@@ -75,7 +76,7 @@ namespace Thoughtology.Expresso.Commands
 
         private void InitializeRepository()
         {
-            repository = ServiceLocator.GetInstance<IRepository<Post>>();
+            repository = ServiceLocator.Current.GetInstance<IRepository<Post>>();
         }
 
         private void SendNewPostToPipeline()

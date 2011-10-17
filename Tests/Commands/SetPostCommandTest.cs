@@ -2,14 +2,15 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Management.Automation;
-using Microsoft.Practices.ServiceLocation;
 using Moq;
 using Thoughtology.Expresso.Commands;
+using Thoughtology.Expresso.Commands.Runtime;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
 using Xunit.Extensions;
+using Common = Microsoft.Practices.ServiceLocation;
 
 namespace Thoughtology.Expresso.Tests.Commands
 {
@@ -69,14 +70,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObject_ReturnsInputObject(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -89,7 +90,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithId_ReturnsPostWithSameId(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -98,7 +99,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -111,14 +112,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObject_SavesInputObject(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -131,7 +132,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithNullInputObjectAndId_DoesNotThrow(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -140,7 +141,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = null;
@@ -153,7 +154,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndTitle_SavesInputObjectWithNewTitle(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string title)
@@ -161,7 +162,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -176,14 +177,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndNullTitle_SavesInputObjectWithNotNullTitle(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -198,7 +199,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndContent_SavesInputObjectWithNewContent(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string content)
@@ -206,7 +207,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -221,14 +222,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndNullContent_SavesInputObjectWithNotNullContent(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -243,7 +244,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithId_SavesPostWithSameId(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -252,7 +253,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -265,7 +266,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndTitle_SavesPostWithSameIdAndTitle(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string title)
@@ -275,7 +276,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -290,7 +291,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndNullTitle_SavesPostWithSameIdAndNotNullTitle(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -299,7 +300,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -314,7 +315,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndContent_SavesPostWithSameIdAndContent(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string content)
@@ -324,7 +325,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -339,7 +340,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndNullContent_SavesPostWithSameIdAndNotNullContent(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -348,7 +349,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -363,7 +364,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndSingleTag_SavesPostWithSameIdAndTag(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string tag)
@@ -373,7 +374,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -389,7 +390,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndMultipleTags_SavesPostWithSameIdAndTags(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             string[] tags)
@@ -399,7 +400,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -415,7 +416,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdAndNullTags_SavesPostWithSameIdAndEmptyTags(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post)
         {
@@ -424,7 +425,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Returns(posts);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = post.Id;
@@ -439,7 +440,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithInputObjectAndId_SavesInputObject(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             Post post,
             int anotherPostId)
@@ -447,7 +448,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.InputObject = post;
@@ -461,14 +462,14 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdThatDoesNotExist_ThrowsArgumentException(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             int postId)
         {
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = postId;
@@ -480,7 +481,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithIdThatDoesNotExistAndTitle_ThrowsArgumentException(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             int postId,
             string title)
@@ -488,7 +489,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             // Given
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = postId;
@@ -501,7 +502,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithException_ThrowsSameException(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             InvalidOperationException exception,
             int postId)
@@ -510,7 +511,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Throws(exception);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = postId;
@@ -522,7 +523,7 @@ namespace Thoughtology.Expresso.Tests.Commands
         [Theory]
         [AutoMoqData]
         public void Invoke_WithExceptionAndInnerException_ThrowsInnerException(
-            Mock<IServiceLocator> serviceLocator,
+            Mock<Common.IServiceLocator> serviceLocator,
             Mock<IRepository<Post>> repository,
             int postId,
             string message,
@@ -533,7 +534,7 @@ namespace Thoughtology.Expresso.Tests.Commands
             serviceLocator.Setup(s => s.GetInstance<IRepository<Post>>()).Returns(repository.Object);
             repository.Setup(s => s.Find(It.IsAny<Expression<Func<Post, bool>>>())).Throws(exception);
             var sut = new SetPostCommand();
-            sut.SetServiceLocator(serviceLocator.Object);
+            ServiceLocator.SetCurrentInstance(serviceLocator.Object);
 
             // When
             sut.Id = postId;

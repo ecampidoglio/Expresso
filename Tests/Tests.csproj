@@ -87,11 +87,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ErrorRecordFactoryTest.cs" />
+    <Compile Include="Commands\Runtime\ErrorRecordFactoryTest.cs" />
     <Compile Include="Commands\GetPostCommandTest.cs" />
     <Compile Include="Commands\NewPostCommandTest.cs" />
-    <Compile Include="Commands\PSCmdletExtensionTest.cs" />
-    <Compile Include="Commands\ServiceLocatorCommandTest.cs" />
+    <Compile Include="Commands\Runtime\PSCmdletExtensionTest.cs" />
+    <Compile Include="Commands\Runtime\ServiceLocatorTest.cs" />
     <Compile Include="Commands\SetPostCommandTest.cs" />
     <Compile Include="Data\DataContextTest.cs" />
     <Compile Include="Data\RepositoryTest.cs" />
