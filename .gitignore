@@ -4,6 +4,7 @@ build/
 [Bb]in/
 [Oo]bj/
 [Hh]elp/
+[Pp]ackages/
 Packages.dgml
 *.suo
 *.sln.cache
