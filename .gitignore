@@ -5,6 +5,7 @@ build/
 [Oo]bj/
 [Hh]elp/
 [Pp]ackages/
+[Aa]pp_Data/
 Packages.dgml
 *.suo
 *.sln.cache
