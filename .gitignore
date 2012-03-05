@@ -11,5 +11,5 @@ Packages.dgml
 *.sln.cache
 *.user
 *.cache
-*.crunchproject.local.xml
-*.crunchsolution.local.xml
+*.ncrunchproject
+*.ncrunchsolution
