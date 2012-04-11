@@ -5,10 +5,11 @@ build/
 [Oo]bj/
 [Hh]elp/
 [Pp]ackages/
+[Aa]pp_Data/
 Packages.dgml
 *.suo
 *.sln.cache
 *.user
 *.cache
-*.crunchproject.local.xml
-*.crunchsolution.local.xml
+*.ncrunchproject
+*.ncrunchsolution
