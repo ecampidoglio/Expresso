@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <RestorePackages>false</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,9 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Runtime\ErrorRecordFactory.cs" />
     <Compile Include="GetPostCommand.cs" />
     <Compile Include="NewPostCommand.cs" />
+    <Compile Include="Runtime\ErrorRecordFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\PSCmdletExtension.cs" />
     <Compile Include="Runtime\ServiceLocator.cs" />
@@ -92,9 +92,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /F "$(ProjectDir)Metadata\*.*" "$(TargetDir)"
-xcopy /Y /F "$(ProjectDir)Configuration\*.*" "$(TargetDir)..\"</PostBuildEvent>
+xcopy /Y /F "$(ProjectDir)Configuration\*.*" "$(TargetDir)..\"
+xcopy /Y /F /S "$(TargetDir)*.*" "%25USERPROFILE%25\Documents\WindowsPowerShell\Modules\Expresso\"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
+  <!--<Import Project="$(SolutionDir)\.nuget\NuGet.targets" />-->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
