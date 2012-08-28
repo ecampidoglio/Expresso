@@ -1,5 +1,4 @@
-﻿
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 $webSiteName = "Expresso"
 $physicalPath = "C:\inetpub\wwwroot\Expresso"
 
