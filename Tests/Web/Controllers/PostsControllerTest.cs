@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Moq;
-using Thoughtology.Expresso.Controllers;
 using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Services;
 using Thoughtology.Expresso.Tests.Foundation;
+using Thoughtology.Expresso.Web.Controllers;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Thoughtology.Expresso.Tests.Web.Controllers
 {
-    public class PostsControllerTest
+    public class PostControllerTest
     {
         [Theory]
         [AutoMoqData]
         public void Constructor_SutIsController(Mock<IQueryService<Post>> postQueryService)
         {
             // When
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // Then
             Assert.IsAssignableFrom<Controller>(sut);
@@ -29,7 +29,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         public void Constructor_WithNullPostQueryService_ThrowsArgumentNullException()
         {
             // When, Then
-            Assert.Throws(typeof(ArgumentNullException), () => new PostsController(null));
+            Assert.Throws(typeof(ArgumentNullException), () => new PostController(null));
         }
 
         [Theory]
@@ -37,7 +37,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         public void Index_DoesNotReturnNull(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // When
             var result = sut.Index();
@@ -51,7 +51,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         public void Index_ReturnsView(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // When
             var result = sut.Index();
@@ -65,13 +65,13 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         public void Index_ReturnsViewWithPostsSequenceInViewBag(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // When
-            var result = sut.Index() as ViewResult;
+            var result = sut.Index();
 
             // Then
-            Assert.IsAssignableFrom<IEnumerable<Post>>(result.ViewBag.Posts);
+            Assert.IsAssignableFrom<IEnumerable<Post>>(result.ViewData.Model);
         }
 
         [Theory]
@@ -79,11 +79,11 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         public void Index_WithNoPosts_ReturnsViewWithEmptyPostsSequenceInViewBag(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // When
-            var result = sut.Index() as ViewResult;
-            var posts = result.ViewBag.Posts as IEnumerable<Post>;
+            var result = sut.Index();
+            var posts = result.ViewData.Model as IEnumerable<Post>;
 
             // Then
             Assert.False(posts.Any());
@@ -97,11 +97,11 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         {
             // Given
             postQueryService.Setup(s => s.Find()).Returns(posts);
-            var sut = new PostsController(postQueryService.Object);
+            var sut = new PostController(postQueryService.Object);
 
             // When
-            var view = sut.Index() as ViewResult;
-            var result = view.ViewBag.Posts as IEnumerable<Post>;
+            var view = sut.Index();
+            var result = view.ViewData.Model as IEnumerable<Post>;
 
             // Then
             Assert.Equal(posts.Count(), result.Count());

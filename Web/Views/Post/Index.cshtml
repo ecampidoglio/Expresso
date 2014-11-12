@@ -1,0 +1,19 @@
+﻿@model System.Collections.Generic.IEnumerable<Thoughtology.Expresso.Model.Post>
+
+@{ ViewBag.Title = "Posts"; }
+
+@foreach (var post in Model)
+{
+    <h1>@post.Title</h1>
+
+    <h3>Posted @post.ModifiedTimestamp.ToString("d")</h3>
+
+    <p>@post.MarkdownContent</p>
+
+    <ul class="tags">
+        @foreach (var tag in post.Tags)
+        {
+            <li>@tag.Name</li>
+        }
+    </ul>
+}

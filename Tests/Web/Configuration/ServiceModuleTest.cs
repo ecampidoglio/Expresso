@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using Thoughtology.Expresso.Services;
-using Thoughtology.Expresso.Web.Configuration;
+using Thoughtology.Expresso.Services.Configuration;
 using Xunit;
 
 namespace Thoughtology.Expresso.Tests.Web.Configuration
