@@ -16,7 +16,27 @@ namespace Thoughtology.Expresso.Data
         /// </summary>
         public static void Configure()
         {
+            UseSqlServer();
+            CreateDatabaseOnlyWhenMissing();
+        }
+
+        private static void UseSqlServer()
+        {
+            Database.DefaultConnectionFactory = new SqlConnectionFactory();
+        }
+
+        private static void UseSqlCompact()
+        {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
+        }
+
+        private static void CreateDatabaseOnlyWhenMissing()
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<DataContext>());
+        }
+
+        private static void CreateDatabaseWhenModelChanges()
+        {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
         }
     }
