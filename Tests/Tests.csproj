@@ -108,6 +108,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
     </Reference>
+    <Reference Include="xunit.runner.msbuild">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Runtime\ErrorRecordFactoryTest.cs" />
@@ -153,8 +156,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="xunit.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="xunit.targets" />
   <!--<Import Project="$(SolutionDir)\.nuget\NuGet.targets" />-->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
