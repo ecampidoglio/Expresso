@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Expresso-Web</id>
+        <version>1.0.0</version>
+        <title>Expresso</title>
+        <authors>Enrico Campidoglio</authors>
+        <licenseUrl>http://creativecommons.org/licenses/by-sa/4.0</licenseUrl>
+        <projectUrl>http://megakemp.com</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A lightweight ASP.NET MVC Markdown-based blog engine.</description>
+    </metadata>
+</package>
