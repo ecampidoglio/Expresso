@@ -3,36 +3,35 @@ using Autofac;
 using Autofac.Core;
 using Thoughtology.Expresso.Data;
 using Thoughtology.Expresso.Data.Configuration;
+using Thoughtology.Expresso.Tests.Foundation;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Thoughtology.Expresso.Tests.Web.Configuration
 {
     public class RepositoryModuleTest
     {
-        [Fact]
-        public void Constructor_SutIsModule()
+        [Theory, AutoMoqData]
+        public void Constructor_SutIsModule(RepositoryModule sut)
         {
-            // When
-            var sut = new RepositoryModule();
-
             // Then
             Assert.IsAssignableFrom<IModule>(sut);
         }
 
-        [Fact]
-        public void BuildContainer_ContainerHasAllExpectedServices()
+        [Theory, AutoMoqData]
+        public void BuildContainer_ContainerHasAllExpectedServices(
+            ContainerBuilder builder,
+            RepositoryModule sut)
         {
             // Given
             var expectedServices = new[] { typeof(IUnitOfWork), typeof(IRepository<>) };
-            var builder = new ContainerBuilder();
-            var sut = new RepositoryModule();
 
             // When
             builder.RegisterModule(sut);
             var container = builder.Build();
 
             // Then
-            Assert.True(expectedServices.All(s => container.IsRegistered(s)));
+            Assert.True(expectedServices.All(container.IsRegistered));
         }
     }
 }

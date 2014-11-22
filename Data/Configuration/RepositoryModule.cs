@@ -8,6 +8,17 @@ namespace Thoughtology.Expresso.Data.Configuration
     public class RepositoryModule : Module
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="RepositoryModule /> class.
+        /// </summary>
+        /// <param name="connectionString">
+        /// The connection string used to connect to the database.
+        /// </param>
+        public RepositoryModule(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
+        /// <summary>
         /// Gets or sets the connection string used to interact with the data store.
         /// </summary>
         public string ConnectionString { get; set; }
@@ -23,8 +34,12 @@ namespace Thoughtology.Expresso.Data.Configuration
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new DataContext(ConnectionString)).As<IUnitOfWork>();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder
+                .Register(c => new DataContext(this.ConnectionString))
+                .As<IUnitOfWork>();
+            builder
+                .RegisterGeneric(typeof(Repository<>))
+                .As(typeof(IRepository<>));
         }
     }
 }

@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\RepositoryModule.cs" />
-    <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="IRepository.cs" />
