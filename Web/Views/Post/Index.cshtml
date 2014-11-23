@@ -2,16 +2,28 @@
 
 @foreach (var post in Model)
 {
-    <h1>@post.Title</h1>
+<article class="post tag-photoshop tag-webdesign tag-bonnes-pratiques">
+    <header class="post-header">
+        <span class="post-meta">
+            <time datetime="@post.ModifiedTimestamp.ToString("d")">
+                @post.ModifiedTimestamp.ToString("d")
+            </time>
+        </span>
+        <h2 class="post-title">@post.Title</h2>
+    </header>
+    <section class="post-excerpt">
+        <p>@post.MarkdownContent</p>
+    </section>
 
-    <h3>Posted @post.ModifiedTimestamp.ToString("d")</h3>
+    <a class="button read-more right small" href="#">Read</a>
 
-    <p>@post.MarkdownContent</p>
+    <aside class="tags fi-pricetag-multiple">
+    @foreach (var tag in post.Tags)
+    {
+        <a href="#">@tag.Name</a>
+    }
+    </aside>
 
-    <ul class="tags">
-        @foreach (var tag in post.Tags)
-        {
-            <li>@tag.Name</li>
-        }
-    </ul>
+    <div class="clearfix"></div>
+</article>
 }

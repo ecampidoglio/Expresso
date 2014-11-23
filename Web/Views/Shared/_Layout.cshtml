@@ -1,12 +1,131 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="text/javascript" src="/assets/js/vendor/fastclick.js?v=21f2adcd32"></script>
+    <script type="text/javascript" src="/assets/js/vendor/modernizr.js?v=21f2adcd32"></script>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/Css/Normalize.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/Css/Foundation.min.css")" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/Css/OutdatedBrowser.min.css")">
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/Fonts/Foundation-Icons/Foundation-Icons.css?")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Assets/Css/Styles.css")" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,700,400|Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic" />
 </head>
-<body>
-    <div>
-        @RenderBody()
+<body class="home-template">
+
+    <div id="outdated">
+        <h6>Your broswer is not supported.</h6>
+        <p>In order to correctly view the site, please <a id="btnUpdate" href="http://outdatedbrowser.com/">update your browser to a modern one.</a></p>
     </div>
+
+    <nav class="top-bar hide-for-large-up" data-topbar style="background: none">
+        <ul class="title-area">
+            <li class="name">
+
+            </li>
+            <li class="home"><a class="fi-home" href="#"></a></li>
+            <li class="toggle-topbar"><a href="#" id="trigger-overlay" class="fi-list"></a></li>
+        </ul>
+
+        <div class="overlay overlay-scale">
+            <button type="button" class="overlay-close">Close</button>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="small-16 medium-16 large-4 columns right head-area bgimage" style="background-image: url(/content/images/2014/Feb/460028_559060700804771_1975417912_o-1.jpg)">
+            <header class="site-head">
+                <div class="vertical">
+                    <div class="site-head-content inner">
+                        <ul class="side-nav blog-menu show-for-large-up">
+                            <li><a class="fi-home" href="http://www.desintegrateur.fr"></a></li>
+                            <li><a class="fi-torso" href="http://www.desintegrateur.fr/about"></a></li>
+                            <li><a class="fi-mail" href="http://www.desintegrateur.fr/contact"></a></li>
+                        </ul>
+                        <a class="blog-logo" href="#"><img src="@Url.Content("~/Assets/Images/logo.png")" alt="Blog Logo" /></a>
+                        <h1 class="blog-title">Expresso</h1>
+                        <hr>
+                        <p class="blog-description"></p>
+                        <div class="blog-network">
+                            <!--                 <a href="#" class="fi-social-pinterest"></a>
+                                            <a href="#" class="fi-social-linkedin"></a>
+                                            <a href="#" class="fi-social-behance"></a>
+                                            <a href="#" class="fi-social-deviant-art"></a>
+                                            <a href="#" class="fi-social-dribbble"></a>
+                                            <a href="#" class="fi-social-flickr"></a>
+                                            <a href="#" class="fi-social-github"></a>
+                                            <a href="#" class="fi-social-skype"></a>
+                                            <a href="#" class="fi-social-snapchat"></a>
+                                            <a href="#" class="fi-social-steam"></a>
+                                            <a href="#" class="fi-social-xbox"></a>
+                                            <a href="#" class="fi-social-reddit"></a> -->
+                            <a href="#" class="fi-rss"></a>
+                            <a href="#" class="fi-social-google-plus"></a>
+                            <a href="#" class="fi-social-twitter"></a>
+                            <a href="#" class="fi-social-facebook"></a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="small-16 medium-16 large-12 columns main-column left">
+            <main class="content" role="main">
+
+                @RenderBody()
+
+                <nav class="pagination" role="navigation">
+                    <span class="page-number">Page 1 of 1</span>
+                    <a href="/page/2/" class="tiny secondary button fi-arrow-right"></a>
+                </nav>
+
+                <div class="row">
+                    <footer class="small-16 columns site-footer">
+                        <!-- <a class="subscribe icon-feed" href="http://www.desintegrateur.fr/rss/"><span class="tooltip">Subscribe!</span></a> -->
+                        <div class="inner">
+                            <section class="published">Published with <a href="#" target="_blank">Expresso</a></section>
+                            <section class="copyright">Copyright <a href="http://www.desintegrateur.fr/">Désintégrateur</a> &copy; 2014</section>
+                            <section class="theme-author">Theme developed by <a href="https://alexisdegryse.fr">Alexis Degryse</a></section>
+                        </div>
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/public/jquery.min.js?v=21f2adcd32"></script>
+
+    <!--[if lte IE 8]>
+        <script type="text/javascript" src="/assets/js/outdatedBrowser.min.js?v=21f2adcd32"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript" src="/assets/js/foundation.min.js"></script>
+    <script type="text/javascript" src="/assets/js/overlay/snap.svg-min.js"></script>
+    <script type="text/javascript" src="/assets/js/overlay/classie.js"></script>
+    <script type="text/javascript" src="/assets/js/overlay/demo1.js"></script>
+    <script type="text/javascript" src="/assets/js/vendor/smoothscroll.js"></script>
+
+    <script>
+        $(document).foundation();
+    </script>
+    <img src="/view.gif?page=/" alt="" style="display:none" hidden />
 </body>
 </html>
