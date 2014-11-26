@@ -8,7 +8,7 @@ namespace Thoughtology.Expresso.Data.Configuration
     public class RepositoryModule : Module
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RepositoryModule /> class.
+        /// Initializes a new instance of the <see cref="RepositoryModule" /> class.
         /// </summary>
         /// <param name="connectionString">
         /// The connection string used to connect to the database.
