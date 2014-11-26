@@ -1,0 +1,12 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": ".",
+            "folder_exclude_patterns": ["*NCrunch*", "packages", "bin", "obj"],
+            "file_exclude_patterns": ["*ncrunch*", "*.StyleCop", "*.user", ".gitignore"]
+		}
+	],
+    "solution_file": "./Expresso.sln"
+}
