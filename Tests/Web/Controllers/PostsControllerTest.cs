@@ -14,8 +14,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
 {
     public class PostControllerTest
     {
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Constructor_SutIsController(Mock<IQueryService<Post>> postQueryService)
         {
             // When
@@ -32,8 +31,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             Assert.Throws(typeof(ArgumentNullException), () => new PostController(null));
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Index_DoesNotReturnNull(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
@@ -46,8 +44,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             Assert.NotNull(result);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Index_ReturnsView(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
@@ -60,8 +57,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             Assert.IsType<ViewResult>(result);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Index_ReturnsViewWithPostsSequenceInViewBag(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
@@ -74,8 +70,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             Assert.IsAssignableFrom<IEnumerable<Post>>(result.ViewData.Model);
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Index_WithNoPosts_ReturnsViewWithEmptyPostsSequenceInViewBag(Mock<IQueryService<Post>> postQueryService)
         {
             // Given
@@ -89,11 +84,10 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             Assert.False(posts.Any());
         }
 
-        [Theory]
-        [AutoMoqData]
+        [Theory, AutoMoqData]
         public void Index_WithSomePosts_ReturnsViewWithSameNumberOfItemsInPostsSequenceInViewBag(
-        Mock<IQueryService<Post>> postQueryService,
-        Post[] posts)
+            Mock<IQueryService<Post>> postQueryService,
+            Post[] posts)
         {
             // Given
             postQueryService.Setup(s => s.Find()).Returns(posts);
