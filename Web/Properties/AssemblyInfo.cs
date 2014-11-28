@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Expresso")]
+[assembly: AssemblyTitle("Expresso.Web")]
 [assembly: AssemblyCompany("megakemp.com")]
 [assembly: AssemblyCopyright("Creative Commons Attribution-ShareAlike")]
 [assembly: AssemblyVersion("1.0.0")]
