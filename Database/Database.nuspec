@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Expresso-DB</id>
+        <version>1.0.0</version>
+        <title>Expresso Database</title>
+        <authors>Enrico Campidoglio</authors>
+        <licenseUrl>http://creativecommons.org/licenses/by-sa/4.0</licenseUrl>
+        <projectUrl>http://megakemp.com</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>The database backing the Expresso website.</description>
+    </metadata>
+</package>
