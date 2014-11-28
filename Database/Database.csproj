@@ -50,6 +50,9 @@
     <EmbeddedResource Include="Scripts\Script0001 - Creates tables for posts and tags.sql" />
     <EmbeddedResource Include="Scripts\Script0003 - Adds test data for tags.sql" />
     <None Include="App.config" />
+    <None Include="Deploy.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <Content Include="Database.nuspec" />
   </ItemGroup>
