@@ -46,6 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Script0004 - Adds column to indicate posts that are drafts.sql" />
+    <EmbeddedResource Include="Scripts\Script0005 - Sets published posts as not being drafts.sql" />
     <EmbeddedResource Include="Scripts\Script0002 - Adds test data for posts.sql" />
     <EmbeddedResource Include="Scripts\Script0001 - Creates tables for posts and tags.sql" />
     <EmbeddedResource Include="Scripts\Script0003 - Adds test data for tags.sql" />

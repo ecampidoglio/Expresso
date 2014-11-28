@@ -1,0 +1,6 @@
+﻿USE Expresso
+GO
+
+ALTER TABLE dbo.Posts
+ADD IsDraft bit NOT NULL CONSTRAINT DF_Posts_IsDraft DEFAULT 1
+GO
