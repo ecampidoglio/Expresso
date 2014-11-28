@@ -46,6 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Script0002 - Adds test data for posts.sql" />
+    <EmbeddedResource Include="Scripts\Script0001 - Creates tables for posts and tags.sql" />
+    <EmbeddedResource Include="Scripts\Script0003 - Adds test data for tags.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <Content Include="Database.nuspec" />
