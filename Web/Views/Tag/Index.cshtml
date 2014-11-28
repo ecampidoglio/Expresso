@@ -1,0 +1,22 @@
+﻿@{ ViewBag.Title = "Tagged Posts"; }
+
+@foreach (var post in Model)
+{
+<article class="post tag-photoshop tag-webdesign tag-bonnes-pratiques">
+    <header class="post-header">
+        <span class="post-meta">
+            <time datetime="@post.ModifiedTimestamp.ToString("d")">
+                @post.ModifiedTimestamp.ToString("d")
+            </time>
+        </span>
+        <h2 class="post-title">@post.Title</h2>
+    </header>
+    <section class="post-excerpt">
+        <p>@post.MarkdownContent</p>
+    </section>
+
+    <a class="button read-more right small" href="#">Read</a>
+
+    <div class="clearfix"></div>
+</article>
+}

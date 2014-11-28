@@ -422,6 +422,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -468,6 +469,9 @@
     <Content Include="Assets\Fonts\icons.woff" />
     <Content Include="Assets\Scss\screen.scss" />
     <Content Include="Assets\Scss\styles.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tag\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
