@@ -1,0 +1,10 @@
+﻿USE Expresso
+GO
+
+ALTER TABLE dbo.Tags
+DROP CONSTRAINT FK_Tags_Posts
+GO
+
+ALTER TABLE dbo.Tags
+DROP COLUMN Post_Id
+GO
