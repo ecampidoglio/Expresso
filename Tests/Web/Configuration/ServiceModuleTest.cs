@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Autofac;
 using Autofac.Core;
+using Thoughtology.Expresso.Model;
 using Thoughtology.Expresso.Services;
 using Thoughtology.Expresso.Services.Configuration;
 using Xunit;
@@ -25,7 +26,8 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
             // Given
             var expectedServices = new[]
             {
-                typeof(IQueryService<>),
+                typeof(IQueryService<Post>),
+                typeof(IQueryService<Tag>),
                 typeof(ICommandService<>)
             };
             var builder = new ContainerBuilder();
@@ -36,7 +38,7 @@ namespace Thoughtology.Expresso.Tests.Web.Configuration
             var container = builder.Build();
 
             // Then
-            Assert.True(expectedServices.All(s => container.IsRegistered(s)));
+            Assert.True(expectedServices.All(container.IsRegistered));
         }
     }
 }

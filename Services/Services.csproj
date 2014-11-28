@@ -52,8 +52,9 @@
     <Compile Include="IMarkdownConverter.cs" />
     <Compile Include="IQueryService.cs" />
     <Compile Include="MarkdownConverter.cs" />
-    <Compile Include="QueryService.cs" />
+    <Compile Include="PostQueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagQueryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">

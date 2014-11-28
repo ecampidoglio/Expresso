@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Thoughtology.Expresso.Model;
 
 namespace Thoughtology.Expresso.Services.Configuration
 {
@@ -18,8 +19,15 @@ namespace Thoughtology.Expresso.Services.Configuration
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterGeneric(typeof(QueryService<>)).As(typeof(IQueryService<>));
-            builder.RegisterGeneric(typeof(CommandService<>)).As(typeof(ICommandService<>));
+            builder
+                .RegisterType<PostQueryService>()
+                .As(typeof(IQueryService<Post>));
+            builder
+                .RegisterType<TagQueryService>()
+                .As(typeof(IQueryService<Tag>));
+            builder
+                .RegisterGeneric(typeof(CommandService<>))
+                .As(typeof(ICommandService<>));
         }
     }
 }
