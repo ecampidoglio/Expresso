@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Thoughtology.Expresso.Model
 {
@@ -7,6 +8,14 @@ namespace Thoughtology.Expresso.Model
     /// </summary>
     public class Tag
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tag"/> class.
+        /// </summary>
+        public Tag()
+        {
+            this.Posts = new List<Post>();
+        }
+
         /// <summary>
         /// Gets or sets the unique numeric identifier.
         /// </summary>
@@ -17,5 +26,10 @@ namespace Thoughtology.Expresso.Model
         /// Gets or sets the name of the tag.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets the collection of posts associated to this tag.
+        /// </summary>
+        public ICollection<Post> Posts { get; private set; }
     }
 }
