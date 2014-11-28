@@ -50,6 +50,11 @@ namespace Thoughtology.Expresso.Model
         public DateTime? PublishedTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets a flag indicating whether the post is draft.
+        /// </summary>
+        public bool IsDraft { get; set; }
+
+        /// <summary>
         /// Gets the collection of tags associated to this post.
         /// </summary>
         public ICollection<Tag> Tags { get; private set; }

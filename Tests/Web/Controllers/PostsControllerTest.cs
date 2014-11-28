@@ -85,11 +85,12 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
         }
 
         [Theory, AutoMoqData]
-        public void Index_WithSomePosts_ReturnsViewWithSameNumberOfItemsInPostsSequenceInViewBag(
+        public void Index_WithSomePosts_ReturnsViewWithPublishedPostInItsModel(
             Mock<IQueryService<Post>> postQueryService,
             Post[] posts)
         {
             // Given
+            var publishedPosts = posts.Where(p => !p.IsDraft);
             postQueryService.Setup(s => s.Find()).Returns(posts);
             var sut = new PostController(postQueryService.Object);
 
@@ -98,7 +99,7 @@ namespace Thoughtology.Expresso.Tests.Web.Controllers
             var result = view.ViewData.Model as IEnumerable<Post>;
 
             // Then
-            Assert.Equal(posts.Count(), result.Count());
+            Assert.Equal(publishedPosts.Count(), result.Count());
         }
     }
 }
